@@ -1,0 +1,31 @@
+;	Legend
+; "@" - player
+; " " - ground
+; "#" - solid wall
+; "." - destructible wall
+; "P" - portal
+; "B" - bomb up
+; "N" - bomb down
+; "R" - range up
+; "T" - range down
+; "S" - speed up
+; "D" - speed down
+; "E" - enemy
+
+#############
+#           #
+# # # # # # #
+#           #
+# # # # # # #
+#           #
+#.#.#.#.#.#.#
+#  .......P.#
+#@#.#.#.#.#.#
+#R........B.#
+# # # # # # #
+#           #
+# # # # # # #
+#           #
+# # # # # # #
+#           #
+#############
