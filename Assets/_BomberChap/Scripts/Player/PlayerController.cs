@@ -5,6 +5,7 @@ using System.Collections;
 namespace BomberChap
 {
 	[RequireComponent(typeof(CharacterMotor))]
+	[RequireComponent(typeof(PlayerStats))]
 	public class PlayerController : MonoBehaviour
 	{
 		private const string ANIMATOR_MOVE_VERT_STATE = "MoveVert";
@@ -25,10 +26,21 @@ namespace BomberChap
 		private void Start()
 		{
 			m_motor = GetComponent<CharacterMotor>();
-			m_motor.Speed = GlobalConstants.MIN_PLAYER_SPEED;
+			m_motor.Speed = PlayerPrefs.GetFloat(PlayerPrefsKeys.PLAYER_SPEED, GlobalConstants.MIN_PLAYER_SPEED);
 			m_currentLevel = LevelManager.GetLoadedLevel();
 			m_lastHDir = 0;
 			m_lastVDir = 0;
+			NotificationCenter.AddObserver(gameObject, Notifications.ON_GAME_LEVEL_COMPLETE);
+
+			PlayerStats playerStats = GetComponent<PlayerStats>();
+			playerStats.MaxBombs = PlayerPrefs.GetInt(PlayerPrefsKeys.BOMB_COUNT, GlobalConstants.MIN_BOMB_COUNT);
+			playerStats.BombRange = PlayerPrefs.GetInt(PlayerPrefsKeys.BOMB_RANGE, GlobalConstants.MIN_BOMB_RANGE);
+		}
+
+		private void OnDestroy()
+		{
+			if(NotificationCenter.Exists)
+				NotificationCenter.RemoveObserver(gameObject, Notifications.ON_GAME_LEVEL_COMPLETE);
 		}
 
 		private void Update()
@@ -122,6 +134,20 @@ namespace BomberChap
 		{
 			if(Input.GetButtonDown("DropBomb"))
 				SendMessage("DropBomb");
+		}
+
+		private void OnTriggerEnter2D(Collider2D other)
+		{
+			if(other.tag == Tags.Flame)
+				LevelManager.ReloadCurrentLevel();
+		}
+
+		private void OnGameLevelComplete()
+		{
+			PlayerStats playerStats = GetComponent<PlayerStats>();
+			PlayerPrefs.SetInt(PlayerPrefsKeys.BOMB_COUNT, playerStats.MaxBombs);
+			PlayerPrefs.SetInt(PlayerPrefsKeys.BOMB_RANGE, playerStats.BombRange);
+			PlayerPrefs.SetFloat(PlayerPrefsKeys.PLAYER_SPEED, m_motor.Speed);
 		}
 	}
 }

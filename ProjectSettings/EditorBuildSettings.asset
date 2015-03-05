@@ -4,4 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/_BomberChap/Scenes/main.unity
+  - enabled: 1
+    path: Assets/_BomberChap/Scenes/main_menu.unity
+  - enabled: 1
+    path: Assets/_BomberChap/Scenes/sp_main.unity
+  - enabled: 1
+    path: Assets/_BomberChap/Scenes/sp_win.unity
+  - enabled: 1
+    path: Assets/_BomberChap/Scenes/mp_main.unity

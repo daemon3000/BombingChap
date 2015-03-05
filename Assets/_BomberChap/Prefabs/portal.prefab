@@ -11,6 +11,7 @@ GameObject:
   - 212: {fileID: 21238882}
   - 61: {fileID: 6191290}
   - 50: {fileID: 5046240}
+  - 114: {fileID: 11484146}
   m_Layer: 0
   m_Name: portal
   m_TagString: Portal
@@ -58,6 +59,17 @@ BoxCollider2D:
   m_Offset: {x: .319999993, y: -.319999993}
   serializedVersion: 2
   m_Size: {x: .400000006, y: .400000006}
+--- !u!114 &11484146
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 188024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c5991b451d499e4d939782723e464cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &21238882
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -17,7 +17,6 @@ namespace BomberChap
 		[SerializeField] private bool m_dontDestroyOnLoad;
 		private PauseManagerState m_state;
 		private float m_lastTimeScale;
-		private bool m_hardPause;
 		private static PauseManager m_instance;
 		
 		public static PauseManager Instance
@@ -71,7 +70,6 @@ namespace BomberChap
 			else
 			{
 				m_instance = this;
-				m_hardPause = false;
 				m_lastTimeScale = Time.timeScale;
 				m_state = PauseManagerState.Idle;
 				if(m_dontDestroyOnLoad)
@@ -94,23 +92,6 @@ namespace BomberChap
 				break;
 			default:
 				break;
-			}
-			
-			if(Input.GetButtonDown("Pause"))
-			{
-				if(m_state == PauseManagerState.Idle)
-				{
-					m_state = PauseManagerState.Pausing;
-					m_hardPause = true;
-				}
-				else if(m_state == PauseManagerState.Paused)
-				{
-					if(m_hardPause)
-					{
-						m_state = PauseManagerState.UnPausing;
-						m_hardPause = false;
-					}
-				}
 			}
 		}
 		

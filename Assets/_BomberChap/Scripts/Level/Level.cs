@@ -274,31 +274,24 @@ namespace BomberChap
 						break;
 					case Tiles.PORTAL:
 						CreatePortal(worldPos);
-						continueFlameChain = false;
 						break;
 					case Tiles.BOMB_UP:
 						CreatePowerup(m_prefabSet.bombUpPowerup, worldPos);
-						continueFlameChain = false;
 						break;
 					case Tiles.BOMB_DOWN:
 						CreatePowerup(m_prefabSet.bombDownPowerup, worldPos);
-						continueFlameChain = false;
 						break;
 					case Tiles.RANGE_UP:
 						CreatePowerup(m_prefabSet.rangeUpPowerup, worldPos);
-						continueFlameChain = false;
 						break;
 					case Tiles.RANGE_DOWN:
 						CreatePowerup(m_prefabSet.rangeDownPowerup, worldPos);
-						continueFlameChain = false;
 						break;
 					case Tiles.SPEED_UP:
 						CreatePowerup(m_prefabSet.speedUpPowerup, worldPos);
-						continueFlameChain = false;
 						break;
 					case Tiles.SPEED_DOWN:
 						CreatePowerup(m_prefabSet.speedDownPowerup, worldPos);
-						continueFlameChain = false;
 						break;
 					default:
 						CreateFlame(worldPos);

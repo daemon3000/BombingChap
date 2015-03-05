@@ -95,9 +95,17 @@ namespace BomberChap
 			return m_instance.m_loadedLevel;
 		}
 
-		public static void LoadLevel(int index)
+		public static void LoadLevel(int index, bool fade = true)
 		{
 			m_instance.StartCoroutine(m_instance.LoadLevelWithFade(index));
+		}
+
+		public static void ReloadCurrentLevel(bool fade = true)
+		{
+			if(LoadedLevelIndex >= 0)
+				LoadLevel(LoadedLevelIndex, fade);
+			else
+				Debug.LogError("There is no level currently loaded");
 		}
 
 #if UNITY_EDITOR
