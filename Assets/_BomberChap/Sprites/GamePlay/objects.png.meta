@@ -1,5 +1,7 @@
 fileFormatVersion: 2
 guid: 3a03d988033ce9d48972e75de2201739
+timeCreated: 1425568842
+licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: objects_0
@@ -35,6 +37,9 @@ TextureImporter:
   isReadable: 0
   grayScaleToAlpha: 0
   generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
   textureFormat: -1
   maxTextureSize: 1024
@@ -45,6 +50,7 @@ TextureImporter:
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
+  rGBM: 0
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
@@ -66,7 +72,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 1
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: objects_1
       rect:
@@ -76,7 +82,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 1
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: objects_2
       rect:
@@ -86,7 +92,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 1
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: objects_3
       rect:
@@ -96,7 +102,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 1
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: objects_4
       rect:
@@ -106,7 +112,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 1
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: objects_5
       rect:
@@ -116,7 +122,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 1
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: objects_6
       rect:
@@ -126,7 +132,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 1
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: objects_7
       rect:
@@ -136,7 +142,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 1
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: objects_8
       rect:
@@ -145,8 +151,8 @@ TextureImporter:
         y: 314
         width: 64
         height: 64
-      alignment: 1
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: objects_9
       rect:
@@ -156,7 +162,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 1
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: objects_10
       rect:
@@ -166,7 +172,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 1
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: objects_11
       rect:
@@ -176,7 +182,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 1
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: objects_12
       rect:
@@ -186,7 +192,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 1
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: objects_13
       rect:
@@ -196,7 +202,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 1
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: objects_14
       rect:
@@ -206,7 +212,9 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 1
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
+  assetBundleName: 
+  assetBundleVariant: 

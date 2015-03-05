@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 128076, guid: d2f2a3918ae1e024dba775428d6c3eb4, type: 2}
   mainCamera: {fileID: 125808, guid: f64e6d78796738846a446aaffad49852, type: 2}
-  enemy: {fileID: 0}
+  enemy: {fileID: 162492, guid: 68494d61e82423647ade65be71d6c2db, type: 2}
   flame: {fileID: 176130, guid: b0586e33ea852364a9964b9efc977914, type: 2}
   portal: {fileID: 188024, guid: e09be646d8737614d81f80ccc623c2c1, type: 2}
   bombUpPowerup: {fileID: 145806, guid: ec54448fe245e5542be2ddeee5462940, type: 2}

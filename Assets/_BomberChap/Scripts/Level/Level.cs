@@ -83,6 +83,7 @@ namespace BomberChap
 
 			BuildTilemapMesh();
 			CreatePlayerAndCamera(levelData.playerPosition);
+			CreateEnemies(levelData.enemyPositions);
 		}
 
 		private void BuildTilemapMesh()
@@ -139,11 +140,13 @@ namespace BomberChap
 
 		private void CreatePlayerAndCamera(Vector2 tilePos)
 		{
-			GameObject playerGO = GameObject.Instantiate<GameObject>(m_prefabSet.player);
+			GameObject playerGO = GameObject.Instantiate(m_prefabSet.player) as GameObject;
+			playerGO.name = m_prefabSet.player.name;
 			playerGO.transform.SetParent(transform, false);
 			playerGO.transform.position = TileToWorld(tilePos, -1.0f);
 
-			GameObject cameraGO = GameObject.Instantiate<GameObject>(m_prefabSet.mainCamera);
+			GameObject cameraGO = GameObject.Instantiate(m_prefabSet.mainCamera) as GameObject;
+			cameraGO.name = m_prefabSet.mainCamera.name;
 			cameraGO.transform.SetParent(transform, false);
 			cameraGO.transform.position = new Vector3(playerGO.transform.position.x, playerGO.transform.position.y, -10);
 			CameraController camController = cameraGO.GetComponent<CameraController>();
@@ -151,6 +154,17 @@ namespace BomberChap
 				camController.SetTarget(playerGO.transform);
 			else
 				Debug.LogWarning("The camera prefab doesn't have a camera controller component");
+		}
+
+		private void CreateEnemies(Vector2[] positions)
+		{
+			for(int i = 0; i < positions.Length; i++)
+			{
+				GameObject enemyGO = GameObject.Instantiate(m_prefabSet.enemy) as GameObject;
+				enemyGO.name = m_prefabSet.enemy.name + "_" + i;
+				enemyGO.transform.SetParent(transform, false);
+				enemyGO.transform.position = TileToWorld(positions[i], -1.0f);
+			}
 		}
 
 		public void SetAt(int c, int r, int tileType, bool updateMesh)
