@@ -9,6 +9,8 @@ TagManager:
   - Flame
   - Powerup
   - Bomb
+  - PlayerOne
+  - PlayerTwo
   layers:
   - Default
   - TransparentFX

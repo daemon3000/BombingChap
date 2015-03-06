@@ -5,7 +5,7 @@ using System.Collections;
 namespace BomberChap
 {
 	[RequireComponent(typeof(CharacterMotor))]
-	[RequireComponent(typeof(PlayerStats))]
+	[RequireComponent(typeof(PlayerControls))]
 	public class PlayerController : MonoBehaviour
 	{
 		private const string ANIMATOR_MOVE_VERT_STATE = "MoveVert";
@@ -19,6 +19,7 @@ namespace BomberChap
 		private Animator m_animator;
 
 		private CharacterMotor m_motor;
+		private PlayerControls m_controls;
 		private Level m_currentLevel;
 		private int m_lastHDir;
 		private int m_lastVDir;
@@ -26,21 +27,10 @@ namespace BomberChap
 		private void Start()
 		{
 			m_motor = GetComponent<CharacterMotor>();
-			m_motor.Speed = PlayerPrefs.GetFloat(PlayerPrefsKeys.PLAYER_SPEED, GlobalConstants.MIN_PLAYER_SPEED);
+			m_controls = GetComponent<PlayerControls>();
 			m_currentLevel = LevelManager.GetLoadedLevel();
 			m_lastHDir = 0;
 			m_lastVDir = 0;
-			NotificationCenter.AddObserver(gameObject, Notifications.ON_GAME_LEVEL_COMPLETE);
-
-			PlayerStats playerStats = GetComponent<PlayerStats>();
-			playerStats.MaxBombs = PlayerPrefs.GetInt(PlayerPrefsKeys.BOMB_COUNT, GlobalConstants.MIN_BOMB_COUNT);
-			playerStats.BombRange = PlayerPrefs.GetInt(PlayerPrefsKeys.BOMB_RANGE, GlobalConstants.MIN_BOMB_RANGE);
-		}
-
-		private void OnDestroy()
-		{
-			if(NotificationCenter.Exists)
-				NotificationCenter.RemoveObserver(gameObject, Notifications.ON_GAME_LEVEL_COMPLETE);
 		}
 
 		private void Update()
@@ -57,13 +47,13 @@ namespace BomberChap
 			Vector2 tilePos = m_currentLevel.WorldToTile(transform.position);
 			int h = 0, v = 0;
 
-			if(Input.GetButton("MoveUp"))
+			if(Input.GetButton(m_controls.MoveUpButton))
 				v = 1;
-			else if(Input.GetButton("MoveDown"))
+			else if(Input.GetButton(m_controls.MoveDownButton))
 				v = -1;
-			else if(Input.GetButton("MoveRight"))
+			else if(Input.GetButton(m_controls.MoveRightButton))
 				h = 1;
-			else if(Input.GetButton("MoveLeft"))
+			else if(Input.GetButton(m_controls.MoveLeftButton))
 				h = -1;
 
 			if(v > 0) 
@@ -132,22 +122,8 @@ namespace BomberChap
 
 		private void HandleActionInput()
 		{
-			if(Input.GetButtonDown("DropBomb"))
+			if(Input.GetButtonDown(m_controls.DropBombButton))
 				SendMessage("DropBomb");
-		}
-
-		private void OnTriggerEnter2D(Collider2D other)
-		{
-			if(other.tag == Tags.Flame || other.tag == Tags.Enemy)
-				LevelManager.ReloadCurrentLevel();
-		}
-
-		private void OnGameLevelComplete()
-		{
-			PlayerStats playerStats = GetComponent<PlayerStats>();
-			PlayerPrefs.SetInt(PlayerPrefsKeys.BOMB_COUNT, playerStats.MaxBombs);
-			PlayerPrefs.SetInt(PlayerPrefsKeys.BOMB_RANGE, playerStats.BombRange);
-			PlayerPrefs.SetFloat(PlayerPrefsKeys.PLAYER_SPEED, m_motor.Speed);
 		}
 	}
 }

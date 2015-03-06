@@ -33,9 +33,7 @@ namespace BomberChap
 			get
 			{
 				return m_type == Tiles.DESTRUCTIBLE_WALL || m_type == Tiles.PORTAL ||
-						m_type == Tiles.BOMB_UP || m_type == Tiles.BOMB_DOWN || 
-						m_type == Tiles.RANGE_UP || m_type == Tiles.RANGE_DOWN ||
-						m_type == Tiles.SPEED_UP || m_type == Tiles.SPEED_DOWN;
+						m_type == Tiles.RANDOM_POWERUP;
 			}
 		}
 

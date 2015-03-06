@@ -14,9 +14,10 @@ GameObject:
   - 114: {fileID: 11468352}
   - 114: {fileID: 11479370}
   - 114: {fileID: 11432584}
+  - 114: {fileID: 11426640}
   m_Layer: 0
-  m_Name: player
-  m_TagString: Player
+  m_Name: mp_player_two
+  m_TagString: PlayerTwo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -120,6 +121,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_speed: 2.5
+--- !u!114 &11426640
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 128076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da8ae3e818a0cf341a31fa03124a0aeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_moveUpButton: MoveUp_P2
+  m_moveDownButton: MoveDown_P2
+  m_moveRightButton: MoveRight_P2
+  m_moveLeftButton: MoveLeft_P2
+  m_dropBombButton: DropBomb_P2
 --- !u!114 &11432584
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -180,7 +197,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 4
   m_Sprite: {fileID: 21300016, guid: 5b7ab06fc930ce7498e88c06a2792b5e, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: .651600361, g: .653749645, b: .963235319, a: 1}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

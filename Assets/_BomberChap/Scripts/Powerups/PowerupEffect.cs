@@ -5,6 +5,6 @@ namespace BomberChap
 {
 	public enum PowerupEffect
 	{
-		BombCountUp, BombCountDown, BombRangeUp, BombRangeDown, SpeedUp, SpeedDown
+		None = 0, BombCountUp, BombCountDown, BombRangeUp, BombRangeDown, SpeedUp, SpeedDown
 	}
 }

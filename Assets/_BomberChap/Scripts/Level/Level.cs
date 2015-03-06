@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System;
 using System.Collections;
 
@@ -82,7 +82,15 @@ namespace BomberChap
 #endif
 
 			BuildTilemapMesh();
-			CreatePlayerAndCamera(levelData.playerPosition);
+			if(levelData.isMultiPlayerLevel)
+			{
+				CreatePlayerAndCamera(prefabSet.mpPlayerOne, prefabSet.mpCameraOne, levelData.primaryPlayerPosition);
+				CreatePlayerAndCamera(prefabSet.mpPlayerTwo, prefabSet.mpCameraTwo, levelData.secondaryPlayerPosition);
+			}
+			else
+			{
+				CreatePlayerAndCamera(prefabSet.spPlayer, prefabSet.spCamera, levelData.primaryPlayerPosition);
+			}
 			CreateEnemies(levelData.enemyPositions);
 		}
 
@@ -138,15 +146,15 @@ namespace BomberChap
 			m_tilemapMesh.UpdateMesh();
 		}
 
-		private void CreatePlayerAndCamera(Vector2 tilePos)
+		private void CreatePlayerAndCamera(GameObject playerPrefab, GameObject cameraPrefab, Vector2 tilePos)
 		{
-			GameObject playerGO = GameObject.Instantiate(m_prefabSet.player) as GameObject;
-			playerGO.name = m_prefabSet.player.name;
+			GameObject playerGO = GameObject.Instantiate(playerPrefab) as GameObject;
+			playerGO.name = playerPrefab.name;
 			playerGO.transform.SetParent(transform, false);
 			playerGO.transform.position = TileToWorld(tilePos, -1.0f);
 
-			GameObject cameraGO = GameObject.Instantiate(m_prefabSet.mainCamera) as GameObject;
-			cameraGO.name = m_prefabSet.mainCamera.name;
+			GameObject cameraGO = GameObject.Instantiate(cameraPrefab) as GameObject;
+			cameraGO.name = cameraPrefab.name;
 			cameraGO.transform.SetParent(transform, false);
 			cameraGO.transform.position = new Vector3(playerGO.transform.position.x, playerGO.transform.position.y, -10);
 			CameraController camController = cameraGO.GetComponent<CameraController>();
@@ -289,23 +297,8 @@ namespace BomberChap
 					case Tiles.PORTAL:
 						CreatePortal(worldPos);
 						break;
-					case Tiles.BOMB_UP:
-						CreatePowerup(m_prefabSet.bombUpPowerup, worldPos);
-						break;
-					case Tiles.BOMB_DOWN:
-						CreatePowerup(m_prefabSet.bombDownPowerup, worldPos);
-						break;
-					case Tiles.RANGE_UP:
-						CreatePowerup(m_prefabSet.rangeUpPowerup, worldPos);
-						break;
-					case Tiles.RANGE_DOWN:
-						CreatePowerup(m_prefabSet.rangeDownPowerup, worldPos);
-						break;
-					case Tiles.SPEED_UP:
-						CreatePowerup(m_prefabSet.speedUpPowerup, worldPos);
-						break;
-					case Tiles.SPEED_DOWN:
-						CreatePowerup(m_prefabSet.speedDownPowerup, worldPos);
+					case Tiles.RANDOM_POWERUP:
+						CreatePowerup(worldPos);
 						break;
 					default:
 						CreateFlame(worldPos);
@@ -348,11 +341,47 @@ namespace BomberChap
 			portalGO.transform.position = worldPos;
 		}
 
-		private void CreatePowerup(GameObject prefab, Vector3 worldPos)
+		private void CreatePowerup(Vector3 worldPos)
 		{
-			GameObject powerupGO = GameObject.Instantiate(prefab) as GameObject;
-			powerupGO.transform.SetParent(transform, false);
-			powerupGO.transform.position = worldPos;
+			GameObject prefab = GetRandomPowerupPrefab();
+			if(prefab != null)
+			{
+				GameObject powerupGO = GameObject.Instantiate(prefab) as GameObject;
+				powerupGO.transform.SetParent(transform, false);
+				powerupGO.transform.position = worldPos;
+			}
+		}
+
+		private GameObject GetRandomPowerupPrefab()
+		{
+			PowerupEffect effect = Utils.GetRandomEnum<PowerupEffect>();
+			GameObject prefab = null;
+
+			switch(effect) 
+			{
+			case PowerupEffect.BombCountUp:
+				prefab = m_prefabSet.bombUpPowerup;
+				break;
+			case PowerupEffect.BombCountDown:
+				prefab = m_prefabSet.bombDownPowerup;
+				break;
+			case PowerupEffect.BombRangeUp:
+				prefab = m_prefabSet.rangeUpPowerup;
+				break;
+			case PowerupEffect.BombRangeDown:
+				prefab = m_prefabSet.rangeDownPowerup;
+				break;
+			case PowerupEffect.SpeedUp:
+				prefab = m_prefabSet.speedUpPowerup;
+				break;
+			case PowerupEffect.SpeedDown:
+				prefab = m_prefabSet.speedDownPowerup;
+				break;
+			default:
+				break;
+			}
+
+			return prefab;
 		}
 	}
 }

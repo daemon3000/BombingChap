@@ -15,8 +15,10 @@ namespace BomberChap
 		public int width;
 		public int height;
 		public int[] map;
-		public Vector2 playerPosition;
+		public Vector2 primaryPlayerPosition;
+		public Vector2 secondaryPlayerPosition;
 		public Vector2[] enemyPositions;
+		public bool isMultiPlayerLevel;
 
 		public void SetDefault()
 		{

@@ -14,5 +14,7 @@ public static class Tags
 	public const string Flame = "Flame";
 	public const string Powerup = "Powerup";
 	public const string Bomb = "Bomb";
+	public const string PlayerOne = "PlayerOne";
+	public const string PlayerTwo = "PlayerTwo";
 	
 }

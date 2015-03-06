@@ -20,5 +20,12 @@ namespace BomberChap
 			array[i] = array[j];
 			array[j] = temp;
 		}
+
+		public static T GetRandomEnum<T>()
+		{
+			System.Array enumValues = System.Enum.GetValues(typeof(T));
+			T randValue = (T)enumValues.GetValue(UnityEngine.Random.Range(0, enumValues.Length));
+			return randValue;
+		}
 	}
 }
