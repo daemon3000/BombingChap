@@ -8,6 +8,8 @@ namespace BomberChap
 		[SerializeField]
 		private GameObject m_guiTexturePrefab;
 		[SerializeField]
+		private Camera m_fadeCamera;
+		[SerializeField]
 		private float m_fadeTime;
 		[SerializeField]
 		private bool m_ignoreTimescale;
@@ -21,6 +23,7 @@ namespace BomberChap
 			GameObject go = GameObject.Instantiate(m_guiTexturePrefab) as GameObject;
 			m_guiTexture = go.GetComponent<GUITexture>();
 			m_guiTexture.gameObject.SetActive(false);
+			m_fadeCamera.gameObject.SetActive(false);
 			m_colorFadeOut = new Color(0.0f, 0.0f, 0.0f, 1.0f);
 			m_colorFadeIn = new Color(0.0f, 0.0f, 0.0f, 0.0f);
 		}
@@ -33,6 +36,7 @@ namespace BomberChap
 		private IEnumerator FadeOutInternal()
 		{
 			m_guiTexture.gameObject.SetActive(true);
+			m_fadeCamera.gameObject.SetActive(true);
 			m_guiTexture.color = m_colorFadeIn;
 			m_guiTexture.pixelInset = new Rect(0f, 0f, Screen.width, Screen.height);
 
@@ -55,6 +59,7 @@ namespace BomberChap
 		private IEnumerator FadeInInternal()
 		{
 			m_guiTexture.gameObject.SetActive(true);
+			m_fadeCamera.gameObject.SetActive(true);
 			m_guiTexture.color = m_colorFadeOut;
 			m_guiTexture.pixelInset = new Rect(0f, 0f, Screen.width, Screen.height);
 			
@@ -73,6 +78,7 @@ namespace BomberChap
 		{
 			StopAllCoroutines();
 			m_guiTexture.gameObject.SetActive(false);
+			m_fadeCamera.gameObject.SetActive(false);
 		}
 	}
 }

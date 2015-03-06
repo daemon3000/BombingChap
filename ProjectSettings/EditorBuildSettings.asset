@@ -15,3 +15,5 @@ EditorBuildSettings:
     path: Assets/_BomberChap/Scenes/sp_win.unity
   - enabled: 1
     path: Assets/_BomberChap/Scenes/mp_main.unity
+  - enabled: 1
+    path: Assets/_BomberChap/Scenes/mp_win.unity

@@ -80,14 +80,19 @@ namespace BomberChap
 			}
 		}
 
-		public static bool IsLastLevelLoaded
+		public static int LevelCount
 		{
-			get { return m_instance.m_loadedLevelIndex == (m_instance.m_levels.Length - 1); }
+			get { return m_instance.m_levels.Length; }
 		}
 
 		public static int LoadedLevelIndex
 		{
 			get { return m_instance.m_loadedLevelIndex; }
+		}
+
+		public static bool IsLastLevelLoaded
+		{
+			get { return m_instance.m_loadedLevelIndex == (m_instance.m_levels.Length - 1); }
 		}
 
 		public static Level GetLoadedLevel()
