@@ -14,5 +14,8 @@ namespace BomberChap
 		public const int MAX_BOMB_COUNT = 5;
 		public const int MIN_BOMB_COUNT = 1;
 		public const int BOMB_COUNT_INCREMENT = 1;
+		public const int SCORE_FOR_POSITIVE_POWERUP = 100;
+		public const int SCORE_FOR_NEGATIVE_POWERUP = -50;
+		public const int SCORE_FOR_ENEMY = 100;
 	}
 }

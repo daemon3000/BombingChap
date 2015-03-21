@@ -46,7 +46,8 @@ namespace BomberChap
 				while(m_pool.Count > 0)
 				{
 					GameObject go = m_pool.Dequeue();
-					GameObject.Destroy(go);
+					if(go != null)
+						GameObject.Destroy(go);
 				}
 				m_pool.Clear();
 			}

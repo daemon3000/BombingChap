@@ -10,8 +10,10 @@ namespace BomberChap
 		public const int MIN_LEVEL_WIDTH = 4;
 		public const int MAX_LEVEL_HEIGHT = 120;
 		public const int MIN_LEVEL_HEIGHT = 4;
+		public const int MIN_ALLOCATED_TIME = 20;
 
 		public TextAsset source;
+		public int allocatedTime;
 		public int width;
 		public int height;
 		public int[] map;

@@ -10,5 +10,9 @@ namespace BomberChap
 		public const string ON_PLAYER_ONE_DEAD = "OnPlayerOneDead";
 		public const string ON_PLAYER_TWO_DEAD = "OnPlayerTwoDead";
 		public const string ON_MULTI_PLAYER_MATCH_OVER = "OnMultiPlayerMatchOver";
+		public const string ON_GAME_LEVEL_LOADED = "OnGameLevelLoaded";
+		public const string ON_POWERUP_USED = "OnPowerupUsed";
+		public const string ON_SCORE_CHANGED = "OnScoreChanged";
+		public const string ON_ENEMY_DEAD = "OnEnemyDead";
 	}
 }

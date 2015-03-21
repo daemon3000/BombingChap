@@ -45,6 +45,7 @@ namespace BomberChap
 				m_loadedLevel = levelGO.AddComponent<Level>();
 				m_loadedLevel.Load(m_tileset, m_prefabSet, m_levels[index]);
 				m_loadedLevelIndex = index;
+				NotificationCenter.Dispatch(Notifications.ON_GAME_LEVEL_LOADED);
 			}
 			else
 			{
@@ -102,7 +103,10 @@ namespace BomberChap
 
 		public static void LoadLevel(int index, bool fade = true)
 		{
-			m_instance.StartCoroutine(m_instance.LoadLevelWithFade(index));
+			if(fade)
+				m_instance.StartCoroutine(m_instance.LoadLevelWithFade(index));
+			else
+				m_instance.LoadLevelInternal(index);
 		}
 
 		public static void ReloadCurrentLevel(bool fade = true)

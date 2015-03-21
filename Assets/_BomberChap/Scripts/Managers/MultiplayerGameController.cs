@@ -33,19 +33,7 @@ namespace BomberChap
 			m_playerOneWins = 0;
 			m_playerTwoWins = 0;
 
-			NotificationCenter.AddObserver(gameObject, Notifications.ON_PLAYER_ONE_DEAD);
-			NotificationCenter.AddObserver(gameObject, Notifications.ON_PLAYER_TWO_DEAD);
-
 			StartCoroutine(StartNextRound());
-		}
-
-		private void OnDestroy()
-		{
-			if(NotificationCenter.Exists)
-			{
-				NotificationCenter.RemoveObserver(gameObject, Notifications.ON_PLAYER_ONE_DEAD);
-				NotificationCenter.RemoveObserver(gameObject, Notifications.ON_PLAYER_TWO_DEAD);
-			}
 		}
 
 		private IEnumerator StartNextRound()

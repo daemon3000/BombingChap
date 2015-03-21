@@ -3,6 +3,18 @@ using System.Collections;
 
 namespace BomberChap
 {
+	public struct PowerupEvent
+	{
+		public readonly PowerupEffect effect;
+		public readonly GameObject target;
+		
+		public PowerupEvent(PowerupEffect effect, GameObject target)
+		{
+			this.effect = effect;
+			this.target = target;
+		}
+	}
+
 	public class Powerup : MonoBehaviour 
 	{
 		[SerializeField]
@@ -47,13 +59,19 @@ namespace BomberChap
 				break;
 			case PowerupEffect.SpeedUp:
 				motor.Speed += GlobalConstants.PLAYER_SPEED_INCREMENT;
+				if(motor.Speed > GlobalConstants.MAX_PLAYER_SPEED)
+					motor.Speed = GlobalConstants.MAX_PLAYER_SPEED;
 				break;
 			case PowerupEffect.SpeedDown:
 				motor.Speed -= GlobalConstants.PLAYER_SPEED_INCREMENT;
+				if(motor.Speed < GlobalConstants.MIN_PLAYER_SPEED)
+					motor.Speed = GlobalConstants.MIN_PLAYER_SPEED;
 				break;
 			default:
 				break;
 			}
+
+			NotificationCenter.Dispatch(Notifications.ON_POWERUP_USED, new PowerupEvent(m_effect, playerGO), false);
 		}
 	}
 }

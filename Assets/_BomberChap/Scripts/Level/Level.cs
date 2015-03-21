@@ -14,6 +14,7 @@ namespace BomberChap
 		private int[] m_map;
 		private int m_width;
 		private int m_height;
+		private int m_allocatedTime;
 
 		public int Width
 		{
@@ -38,6 +39,11 @@ namespace BomberChap
 		public float PixelToUnit
 		{
 			get { return m_tileset != null ? 1.0f / m_tileset.pixelsToUnit : 1.0f; }
+		}
+
+		public int AllocatedTime
+		{
+			get { return m_allocatedTime; }
 		}
 
 		private void OnDestroy()
@@ -73,6 +79,7 @@ namespace BomberChap
 			m_prefabSet = prefabSet;
 			m_width = levelData.width;
 			m_height = levelData.height;
+			m_allocatedTime = levelData.allocatedTime;
 			m_map = (int[])levelData.map.Clone();
 #if UNITY_EDITOR
 			if(UnityEditor.EditorApplication.isPlaying)
@@ -152,6 +159,7 @@ namespace BomberChap
 			playerGO.name = playerPrefab.name;
 			playerGO.transform.SetParent(transform, false);
 			playerGO.transform.position = TileToWorld(tilePos, -1.0f);
+			PlayerController playerController = playerGO.GetComponent<PlayerController>();
 
 			GameObject cameraGO = GameObject.Instantiate(cameraPrefab) as GameObject;
 			cameraGO.name = cameraPrefab.name;
@@ -159,9 +167,14 @@ namespace BomberChap
 			cameraGO.transform.position = new Vector3(playerGO.transform.position.x, playerGO.transform.position.y, -10);
 			CameraController camController = cameraGO.GetComponent<CameraController>();
 			if(camController != null)
+			{
 				camController.SetTarget(playerGO.transform);
+				playerController.Camera = cameraGO.GetComponent<Camera>();
+			}
 			else
+			{
 				Debug.LogWarning("The camera prefab doesn't have a camera controller component");
+			}
 		}
 
 		private void CreateEnemies(Vector2[] positions)
@@ -298,7 +311,8 @@ namespace BomberChap
 						CreatePortal(worldPos);
 						break;
 					case Tiles.RANDOM_POWERUP:
-						CreatePowerup(worldPos);
+						if(!CreatePowerup(worldPos))
+							CreateFlame(worldPos);
 						break;
 					default:
 						CreateFlame(worldPos);
@@ -341,7 +355,7 @@ namespace BomberChap
 			portalGO.transform.position = worldPos;
 		}
 
-		private void CreatePowerup(Vector3 worldPos)
+		private bool CreatePowerup(Vector3 worldPos)
 		{
 			GameObject prefab = GetRandomPowerupPrefab();
 			if(prefab != null)
@@ -350,6 +364,8 @@ namespace BomberChap
 				powerupGO.transform.SetParent(transform, false);
 				powerupGO.transform.position = worldPos;
 			}
+
+			return prefab != null;
 		}
 
 		private GameObject GetRandomPowerupPrefab()

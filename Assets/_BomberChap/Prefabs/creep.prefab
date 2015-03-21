@@ -12,6 +12,7 @@ GameObject:
   - 50: {fileID: 5044494}
   - 114: {fileID: 11459390}
   - 114: {fileID: 11471630}
+  - 114: {fileID: 11436646}
   m_Layer: 0
   m_Name: creep
   m_TagString: Enemy
@@ -106,6 +107,23 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11436646
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 162492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c010f0bea274d1f47b0b54ad6199956a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_moveVertical: MoveVert
+  m_moveHorizontal: MoveHorz
+  m_startMoveUp: StartMoveUp
+  m_startMoveDown: StartMoveDown
+  m_startMoveRight: StartMoveRight
+  m_startMoveLeft: StartMoveLeft
 --- !u!114 &11459390
 MonoBehaviour:
   m_ObjectHideFlags: 1

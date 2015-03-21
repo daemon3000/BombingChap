@@ -9,5 +9,7 @@ namespace BomberChap
 		public const string PLAYER_SPEED = "PlayerSpeed";
 		public const string BOMB_COUNT = "MaxBombs";
 		public const string BOMB_RANGE = "BombRange";
+		public const string SCORE = "Score";
+		public const string BEST_SCORE = "BestScore";
 	}
 }

@@ -15,8 +15,10 @@ GameObject:
   - 114: {fileID: 11479370}
   - 114: {fileID: 11432584}
   - 114: {fileID: 11495792}
+  - 114: {fileID: 11453894}
   - 114: {fileID: 11468302}
   - 114: {fileID: 11475606}
+  - 114: {fileID: 11428004}
   m_Layer: 0
   m_Name: sp_player
   m_TagString: Player
@@ -123,6 +125,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_speed: 2.5
+--- !u!114 &11428004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 128076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5590a51c90f844f4088b3825b57c9b2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_messages:
+  - OnGameLevelComplete
 --- !u!114 &11432584
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -135,6 +150,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_bombPrefab: {fileID: 118184, guid: 1877f79a884a30b4da674d4c9adcf639, type: 2}
+--- !u!114 &11453894
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 128076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0b6c36faae009440a920e205d48ae44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_moveVertical: MoveVert
+  m_moveHorizontal: MoveHorz
+  m_startMoveUp: StartMoveUp
+  m_startMoveDown: StartMoveDown
+  m_startMoveRight: StartMoveRight
+  m_startMoveLeft: StartMoveLeft
 --- !u!114 &11468302
 MonoBehaviour:
   m_ObjectHideFlags: 1

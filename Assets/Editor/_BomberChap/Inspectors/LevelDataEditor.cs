@@ -21,6 +21,8 @@ namespace BomberChapEditor
 		public override void OnInspectorGUI()
 		{
 			m_levelData.source = EditorGUILayout.ObjectField("Source", m_levelData.source, typeof(TextAsset), false) as TextAsset;
+			m_levelData.allocatedTime = EditorGUILayout.IntField("Allocated Time", m_levelData.allocatedTime);
+			m_levelData.allocatedTime = Mathf.Max(m_levelData.allocatedTime, LevelData.MIN_ALLOCATED_TIME);
 
 			bool wasGUIEnabled = GUI.enabled;
 			GUI.enabled = wasGUIEnabled && m_levelData.source != null;
@@ -37,8 +39,6 @@ namespace BomberChapEditor
 			if(GUI.changed)
 				EditorUtility.SetDirty(target);
 		}
-
-
 
 		[MenuItem("BomberChap/Create/Level Data")]
 		private static void Create()

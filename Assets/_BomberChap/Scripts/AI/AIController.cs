@@ -4,14 +4,9 @@ using System.Collections;
 namespace BomberChap
 {
 	[RequireComponent(typeof(CharacterMotor))]
+	[RequireComponent(typeof(AIAnimatorParameters))]
 	public class AIController : MonoBehaviour 
 	{
-		private const string ANIMATOR_MOVE_VERT_STATE = "MoveVert";
-		private const string ANIMATOR_MOVE_HORZ_STATE = "MoveHorz";
-		private const string ANIMATOR_START_MOVE_UP_STATE = "StartMoveUp";
-		private const string ANIMATOR_START_MOVE_DOWN_STATE = "StartMoveDown";
-		private const string ANIMATOR_START_MOVE_RIGHT_STATE = "StartMoveRight";
-		private const string ANIMATOR_START_MOVE_LEFT_STATE = "StartMoveLeft";
 		private const int DIR_UP = 0;
 		private const int DIR_DOWN = 1;
 		private const int DIR_RIGHT = 2;
@@ -22,6 +17,7 @@ namespace BomberChap
 		
 		private CharacterMotor m_motor;
 		private Level m_currentLevel;
+		private AIAnimatorParameters m_animParam;
 		private int m_lastHDir;
 		private int m_lastVDir;
 		private int[] m_randDir;
@@ -29,6 +25,7 @@ namespace BomberChap
 		private void Start()
 		{
 			m_motor = GetComponent<CharacterMotor>();
+			m_animParam = GetComponent<AIAnimatorParameters>();
 			m_currentLevel = LevelManager.GetLoadedLevel();
 			m_lastHDir = 0;
 			m_lastVDir = 0;
@@ -52,31 +49,31 @@ namespace BomberChap
 			{
 				m_motor.SetDestination(m_currentLevel.TileToWorld((int)tilePos.x, (int)tilePos.y - 1, transform.position.z));
 				if(v != m_lastVDir)
-					m_animator.SetTrigger(ANIMATOR_START_MOVE_UP_STATE);
+					m_animator.SetTrigger(m_animParam.StartMoveUp);
 			}
 			else if(v < 0) 
 			{
 				m_motor.SetDestination(m_currentLevel.TileToWorld((int)tilePos.x, (int)tilePos.y + 1, transform.position.z));
 				if(v != m_lastVDir)
-					m_animator.SetTrigger(ANIMATOR_START_MOVE_DOWN_STATE);
+					m_animator.SetTrigger(m_animParam.StartMoveDown);
 			}
 			else if(h > 0) 
 			{
 				m_motor.SetDestination(m_currentLevel.TileToWorld((int)tilePos.x + 1, (int)tilePos.y, transform.position.z));
 				if(h != m_lastHDir)
-					m_animator.SetTrigger(ANIMATOR_START_MOVE_RIGHT_STATE);
+					m_animator.SetTrigger(m_animParam.StartMoveRight);
 			}
 			else if(h < 0) 
 			{
 				m_motor.SetDestination(m_currentLevel.TileToWorld((int)tilePos.x - 1, (int)tilePos.y, transform.position.z));
 				if(h != m_lastHDir)
-					m_animator.SetTrigger(ANIMATOR_START_MOVE_LEFT_STATE);
+					m_animator.SetTrigger(m_animParam.StartMoveLeft);
 			}
 
 			m_lastHDir = h;
 			m_lastVDir = v;
-			m_animator.SetInteger(ANIMATOR_MOVE_HORZ_STATE, h);
-			m_animator.SetInteger(ANIMATOR_MOVE_VERT_STATE, v);
+			m_animator.SetInteger(m_animParam.MoveHorizontal, h);
+			m_animator.SetInteger(m_animParam.MoveVertical, v);
 		}
 
 		private bool CanMoveInDirection(int c, int r, int hDir, int vDir) 
@@ -129,7 +126,10 @@ namespace BomberChap
 		private void OnTriggerEnter2D(Collider2D other)
 		{
 			if(other.tag == Tags.Flame)
+			{
+				NotificationCenter.Dispatch(Notifications.ON_ENEMY_DEAD);
 				GameObject.Destroy(gameObject);
+			}
 		}
 	}
 }

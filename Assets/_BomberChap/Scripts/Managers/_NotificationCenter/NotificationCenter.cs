@@ -108,5 +108,24 @@ namespace BomberChap
 				}
 			}
 		}
+
+		public static void Dispatch(string message, object arg, bool requireReceiver)
+		{
+			if(m_instance == null)
+				throw new System.NullReferenceException("Notification center instance is null");
+
+			SendMessageOptions options = requireReceiver ? SendMessageOptions.RequireReceiver : SendMessageOptions.DontRequireReceiver;
+			HashSet<GameObject> hs = null;
+			if(m_instance.m_observers.TryGetValue(message, out hs))
+			{
+				foreach(GameObject obs in hs)
+				{
+					if(arg != null)
+						obs.SendMessage(message, arg, options);
+					else
+						obs.SendMessage(message, options);
+				}
+			}
+		}
 	}
 }

@@ -15,14 +15,6 @@ namespace BomberChap
 			playerStats.MaxBombs = PlayerPrefs.GetInt(PlayerPrefsKeys.BOMB_COUNT, GlobalConstants.MIN_BOMB_COUNT);
 			playerStats.BombRange = PlayerPrefs.GetInt(PlayerPrefsKeys.BOMB_RANGE, GlobalConstants.MIN_BOMB_RANGE);
 			motor.Speed = PlayerPrefs.GetFloat(PlayerPrefsKeys.PLAYER_SPEED, GlobalConstants.MIN_PLAYER_SPEED);
-
-			NotificationCenter.AddObserver(gameObject, Notifications.ON_GAME_LEVEL_COMPLETE);
-		}
-
-		private void OnDestroy()
-		{
-			if(NotificationCenter.Exists)
-				NotificationCenter.RemoveObserver(gameObject, Notifications.ON_GAME_LEVEL_COMPLETE);
 		}
 
 		private void OnGameLevelComplete()

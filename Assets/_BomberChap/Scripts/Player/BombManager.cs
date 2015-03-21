@@ -38,6 +38,8 @@ namespace BomberChap
 
 		private void HandleBombExploded(Bomb bomb)
 		{
+			Camera.main.SendMessage("ShakeCamera", SendMessageOptions.DontRequireReceiver);
+
 			bomb.Exploded -= HandleBombExploded;
 			m_currentLevel.OnBombExplosion(bomb.transform.position, m_playerStats.BombRange);
 			m_bombPool.Free(bomb.gameObject);
@@ -46,7 +48,8 @@ namespace BomberChap
 
 		private void OnDestroy()
 		{
-			m_bombPool.Clear(true);
+			if(m_bombPool != null)
+				m_bombPool.Clear(true);
 		}
 	}
 }

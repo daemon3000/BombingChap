@@ -27,6 +27,7 @@ namespace BomberChap
 		private void HandleOnClick()
 		{
 			PlayerPrefs.SetInt(PlayerPrefsKeys.GAME_LEVEL, 0);
+			PlayerPrefs.SetInt(PlayerPrefsKeys.SCORE, 0);
 			PlayerPrefs.SetInt(PlayerPrefsKeys.BOMB_COUNT, GlobalConstants.MIN_BOMB_COUNT);
 			PlayerPrefs.SetInt(PlayerPrefsKeys.BOMB_RANGE, GlobalConstants.MIN_BOMB_RANGE);
 			PlayerPrefs.SetFloat(PlayerPrefsKeys.PLAYER_SPEED, GlobalConstants.MIN_PLAYER_SPEED);
