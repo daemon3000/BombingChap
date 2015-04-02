@@ -1,41 +1,42 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 using System.Collections;
 
 namespace BomberChap
 {
 	[RequireComponent(typeof(Button))]
-	public class LoadSceneOnClick : MonoBehaviour 
+	public class DelayedClick : MonoBehaviour 
 	{
-		[SerializeField]
-		private string m_sceneName;
-
-		[SerializeField]
-		private float m_delay;
-
 		[SerializeField]
 		private bool m_ignoreTimescale;
 
+		[SerializeField]
+		private float m_delay;
+		
+		[SerializeField]
+		private UnityEvent m_onClick;
+		
 		private Button m_button;
-
+		
 		private void Awake()
 		{
 			m_button = GetComponent<Button>();
 			m_button.onClick.AddListener(HandleOnClick);
 		}
-
+		
 		private void OnDestroy()
 		{
 			if(m_button != null)
 				m_button.onClick.RemoveListener(HandleOnClick);
 		}
-
+		
 		private void HandleOnClick()
 		{
-			StartCoroutine(LoadScene());
+			StartCoroutine(RedirectClick());
 		}
-
-		private IEnumerator LoadScene()
+		
+		private IEnumerator RedirectClick()
 		{
 			if(m_ignoreTimescale)
 			{
@@ -50,7 +51,7 @@ namespace BomberChap
 			{
 				yield return new WaitForSeconds(m_delay);
 			}
-			Application.LoadLevel(m_sceneName);
+			m_onClick.Invoke();
 		}
 	}
 }

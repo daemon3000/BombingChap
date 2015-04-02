@@ -11,5 +11,6 @@ namespace BomberChap
 		public const string BOMB_RANGE = "BombRange";
 		public const string SCORE = "Score";
 		public const string BEST_SCORE = "BestScore";
+		public const string MUSIC = "Music";
 	}
 }

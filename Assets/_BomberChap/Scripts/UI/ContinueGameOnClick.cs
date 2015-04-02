@@ -9,6 +9,12 @@ namespace BomberChap
 	{
 		[SerializeField]
 		private string m_singlePlayerSceneName;
+
+		[SerializeField]
+		private float m_delay;
+		
+		[SerializeField]
+		private UnityEngine.Events.UnityEvent m_onContinue;
 		
 		private Button m_button;
 		
@@ -29,6 +35,14 @@ namespace BomberChap
 		
 		private void HandleOnClick()
 		{
+			StartCoroutine(ContinueGame());
+		}
+
+		private IEnumerator ContinueGame()
+		{
+			m_onContinue.Invoke();
+			yield return new WaitForSeconds(m_delay);
+
 			Application.LoadLevel(m_singlePlayerSceneName);
 		}
 	}

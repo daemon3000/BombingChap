@@ -6,6 +6,9 @@ namespace BomberChap
 	public class MainMenu : MonoBehaviour 
 	{
 		[SerializeField]
+		private UnityEngine.UI.GraphicRaycaster m_graphicsRaycaster;
+
+		[SerializeField]
 		private RectTransform m_mainPage;
 
 		[SerializeField]
@@ -26,6 +29,16 @@ namespace BomberChap
 		{
 			m_mainPage.gameObject.SetActive(false);
 			m_singlePlayerPage.gameObject.SetActive(true);
+		}
+
+		public void DisableInput()
+		{
+			m_graphicsRaycaster.enabled = false;
+		}
+
+		public void EnableInput()
+		{
+			m_graphicsRaycaster.enabled = true;
 		}
 	}
 }
