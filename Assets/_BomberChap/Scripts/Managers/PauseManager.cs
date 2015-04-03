@@ -85,10 +85,12 @@ namespace BomberChap
 				m_lastTimeScale = Time.timeScale;
 				m_state = PauseManagerState.Paused;
 				Time.timeScale = 0.0f;
+				NotificationCenter.Dispatch(Notifications.ON_GAME_PAUSED);
 				break;
 			case PauseManagerState.UnPausing:
 				m_state = PauseManagerState.Idle;
 				Time.timeScale = m_lastTimeScale;
+				NotificationCenter.Dispatch(Notifications.ON_GAME_UNPAUSED);
 				break;
 			default:
 				break;

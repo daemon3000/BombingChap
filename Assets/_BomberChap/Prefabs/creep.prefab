@@ -148,6 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_animator: {fileID: 9510806}
+  m_hurtSound: {fileID: 8300000, guid: 85020549641fa452d9136ac2fc852efd, type: 3}
 --- !u!212 &21271148
 SpriteRenderer:
   m_ObjectHideFlags: 1

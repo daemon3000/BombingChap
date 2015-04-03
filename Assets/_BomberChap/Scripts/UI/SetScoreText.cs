@@ -15,6 +15,9 @@ namespace BomberChap
 		[SerializeField]
 		private Color m_bestScoreColor = Color.white;
 
+		[SerializeField]
+		private AudioClip m_newBestScoreSound;
+
 		private void Start()
 		{
 			int bestScore = PlayerPrefs.GetInt(PlayerPrefsKeys.BEST_SCORE, 0);
@@ -22,6 +25,7 @@ namespace BomberChap
 			{
 				m_scoreText.text = "NEW BEST SCORE: " + SinglePlayerGameController.Score;
 				m_scoreText.color = m_bestScoreColor;
+				AudioManager.PlaySound(m_newBestScoreSound);
 			}
 			else
 			{

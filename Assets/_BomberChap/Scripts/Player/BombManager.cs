@@ -9,6 +9,9 @@ namespace BomberChap
 		[SerializeField]
 		private GameObject m_bombPrefab;
 
+		[SerializeField]
+		private AudioClip m_explosionSound;
+
 		private GameObjectPool m_bombPool;
 		private PlayerStats m_playerStats;
 		private Level m_currentLevel;
@@ -44,6 +47,8 @@ namespace BomberChap
 			m_currentLevel.OnBombExplosion(bomb.transform.position, m_playerStats.BombRange);
 			m_bombPool.Free(bomb.gameObject);
 			m_activeBombs--;
+
+			AudioManager.PlaySound(m_explosionSound);
 		}
 
 		private void OnDestroy()

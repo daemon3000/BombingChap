@@ -12,6 +12,9 @@ namespace BomberChap
 		[SerializeField]
 		private Animator m_animator;
 
+		[SerializeField]
+		private AudioClip m_hurtSound;
+
 		private CharacterMotor m_motor;
 		private PlayerControls m_controls;
 		private PlayerAnimatorParameters m_animParam;
@@ -122,6 +125,18 @@ namespace BomberChap
 		{
 			if(Input.GetButtonDown(m_controls.DropBombButton))
 				SendMessage("DropBomb");
+		}
+
+		private void OnTriggerEnter2D(Collider2D other)
+		{
+			if(other.tag == Tags.Flame || other.tag == Tags.Enemy)
+			{
+				AudioManager.PlaySound(m_hurtSound);
+				m_motor.enabled = false;
+				m_animator.SetInteger(m_animParam.MoveHorizontal, 0);
+				m_animator.SetInteger(m_animParam.MoveVertical, 0);
+				this.enabled = false;
+			}
 		}
 	}
 }

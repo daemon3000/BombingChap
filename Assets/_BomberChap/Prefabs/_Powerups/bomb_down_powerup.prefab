@@ -71,6 +71,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_effect: 2
+  m_effectSound: {fileID: 8300000, guid: 2191d3c4d0e65034e8e488579e7afc51, type: 3}
 --- !u!212 &21240418
 SpriteRenderer:
   m_ObjectHideFlags: 1

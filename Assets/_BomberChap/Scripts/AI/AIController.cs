@@ -14,6 +14,9 @@ namespace BomberChap
 		
 		[SerializeField]
 		private Animator m_animator;
+
+		[SerializeField]
+		private AudioClip m_hurtSound;
 		
 		private CharacterMotor m_motor;
 		private Level m_currentLevel;
@@ -128,6 +131,7 @@ namespace BomberChap
 			if(other.tag == Tags.Flame)
 			{
 				NotificationCenter.Dispatch(Notifications.ON_ENEMY_DEAD);
+				AudioManager.PlaySound(m_hurtSound);
 				GameObject.Destroy(gameObject);
 			}
 		}

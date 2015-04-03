@@ -14,5 +14,7 @@ namespace BomberChap
 		public const string ON_POWERUP_USED = "OnPowerupUsed";
 		public const string ON_SCORE_CHANGED = "OnScoreChanged";
 		public const string ON_ENEMY_DEAD = "OnEnemyDead";
+		public const string ON_GAME_PAUSED = "OnGamePaused";
+		public const string ON_GAME_UNPAUSED = "OnGameUnpaused";
 	}
 }

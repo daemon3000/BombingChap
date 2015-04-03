@@ -89,6 +89,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_lifeSpan: 5
+  m_fuseSound: {fileID: 8300000, guid: 238da4efc08184aee919af254edb2ef1, type: 3}
 --- !u!212 &21244478
 SpriteRenderer:
   m_ObjectHideFlags: 1

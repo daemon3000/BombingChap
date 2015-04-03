@@ -20,10 +20,14 @@ namespace BomberChap
 		[SerializeField]
 		private PowerupEffect m_effect;
 
+		[SerializeField]
+		private AudioClip m_effectSound;
+
 		private void OnTriggerEnter2D(Collider2D other)
 		{
 			if(other.tag == Tags.Player)
 			{
+				AudioManager.PlaySound(m_effectSound);
 				ApplyEffect(other.gameObject);
 				GameObject.Destroy(gameObject);
 			}

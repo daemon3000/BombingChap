@@ -31,7 +31,11 @@ namespace BomberChap
 				motion = motion.normalized * m_speed * Time.deltaTime;
 				position += motion;
 
-				if((motion.y > 0.0f && position.y > m_destination.y) || (motion.y < 0.0f && position.y < m_destination.y))
+				if(motion == Vector3.zero)
+				{
+					IsAtDestination = true;
+				}
+				else if((motion.y > 0.0f && position.y > m_destination.y) || (motion.y < 0.0f && position.y < m_destination.y))
 				{
 					position.y = m_destination.y;
 					IsAtDestination = true;
