@@ -41,8 +41,6 @@ namespace BomberChap
 
 		private void HandleBombExploded(Bomb bomb)
 		{
-			Camera.main.SendMessage("ShakeCamera", SendMessageOptions.DontRequireReceiver);
-
 			bomb.Exploded -= HandleBombExploded;
 			m_currentLevel.OnBombExplosion(bomb.transform.position, m_playerStats.BombRange);
 			m_bombPool.Free(bomb.gameObject);

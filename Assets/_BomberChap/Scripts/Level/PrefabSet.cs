@@ -6,12 +6,12 @@ namespace BomberChap
 {
 	public class PrefabSet : ScriptableObject
 	{
+		public GameObject tilemapRenderer;
 		public GameObject spPlayer;
 		public GameObject spCamera;
 		public GameObject mpPlayerOne;
 		public GameObject mpPlayerTwo;
-		public GameObject mpCameraOne;
-		public GameObject mpCameraTwo;
+		public GameObject mpCameraSystem;
 		public GameObject enemy;
 		public GameObject flame;
 		public GameObject portal;

@@ -91,8 +91,11 @@ namespace BomberChap
 			BuildTilemapMesh();
 			if(levelData.isMultiPlayerLevel)
 			{
-				CreatePlayerAndCamera(prefabSet.mpPlayerOne, prefabSet.mpCameraOne, levelData.primaryPlayerPosition);
-				CreatePlayerAndCamera(prefabSet.mpPlayerTwo, prefabSet.mpCameraTwo, levelData.secondaryPlayerPosition);
+				CreateSplitScreenPlayersAndCamera(prefabSet.mpPlayerOne, 
+				                                  prefabSet.mpPlayerTwo,
+				                                  prefabSet.mpCameraSystem,
+				                                  levelData.primaryPlayerPosition,
+				                                  levelData.secondaryPlayerPosition);
 			}
 			else
 			{
@@ -103,11 +106,12 @@ namespace BomberChap
 
 		private void BuildTilemapMesh()
 		{
-			GameObject tilemapGO = new GameObject("tilemap");
+			GameObject tilemapGO = GameObject.Instantiate(m_prefabSet.tilemapRenderer);
+			tilemapGO.name = "tilemap";
 			tilemapGO.transform.SetParent(transform, false);
 			
-			MeshFilter meshFilter = tilemapGO.AddComponent<MeshFilter>();
-			MeshRenderer meshRenderer = tilemapGO.AddComponent<MeshRenderer>();
+			MeshFilter meshFilter = tilemapGO.GetComponent<MeshFilter>();
+			MeshRenderer meshRenderer = tilemapGO.GetComponent<MeshRenderer>();
 			meshRenderer.sharedMaterial = m_tileset.tileSheet;
 			
 			Vector3[] vertices = new Vector3[m_map.Length * 4];
@@ -175,6 +179,32 @@ namespace BomberChap
 			{
 				Debug.LogWarning("The camera prefab doesn't have a camera controller component");
 			}
+		}
+
+		private void CreateSplitScreenPlayersAndCamera(GameObject playerOnePrefab, GameObject playerTwoPrefab, GameObject cameraSystem, Vector2 playerOneTilePos, Vector2 playerTwoTilePos)
+		{
+			GameObject playerOneGO = GameObject.Instantiate(playerOnePrefab) as GameObject;
+			playerOneGO.name = playerOnePrefab.name;
+			playerOneGO.transform.SetParent(transform, false);
+			playerOneGO.transform.position = TileToWorld(playerOneTilePos, -1.0f);
+			PlayerController playerOneController = playerOneGO.GetComponent<PlayerController>();
+
+			GameObject playerTwoGO = GameObject.Instantiate(playerTwoPrefab) as GameObject;
+			playerTwoGO.name = playerOnePrefab.name;
+			playerTwoGO.transform.SetParent(transform, false);
+			playerTwoGO.transform.position = TileToWorld(playerTwoTilePos, -1.0f);
+			PlayerController playerTwoController = playerTwoGO.GetComponent<PlayerController>();
+
+			GameObject cameraSystemGameObject = GameObject.Instantiate(cameraSystem);
+			cameraSystemGameObject.name = cameraSystem.name;
+			cameraSystemGameObject.transform.SetParent(transform, false);
+			SplitScreenView splitScreenView = cameraSystemGameObject.GetComponent<SplitScreenView>();
+			splitScreenView.SetPlayerOne(playerOneGO.transform);
+			splitScreenView.SetPlayerTwo(playerTwoGO.transform);
+			splitScreenView.Initialize();
+
+			playerOneController.Camera = splitScreenView.CameraOne;
+			playerTwoController.Camera = splitScreenView.CameraTwo;
 		}
 
 		private void CreateEnemies(Vector2[] positions)
