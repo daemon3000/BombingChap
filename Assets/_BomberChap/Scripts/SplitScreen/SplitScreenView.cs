@@ -10,6 +10,8 @@ namespace BomberChap
 		[SerializeField]
 		private float m_splitSpacing;
 		[SerializeField]
+		private AnimationCurve m_spacingDistribution;
+		[SerializeField]
 		private Camera m_splitViewCamera;
 		[SerializeField]
 		private Camera m_cameraOne;
@@ -124,8 +126,8 @@ namespace BomberChap
 			float dy = m_splitViewCamera.orthographicSize;
 			float dx = m_splitViewCamera.orthographicSize * m_splitViewCamera.aspect;
 			float r = CalculateViewRatio();
-			float s = dx * m_splitSpacing * Mathf.Max(Mathf.Abs(r), 0.1f);
-			float s2 = 0.5f * m_splitSpacing * Mathf.Max(Mathf.Abs(r), 0.1f);
+			float s = dx * m_splitSpacing * m_spacingDistribution.Evaluate(Mathf.Max(Mathf.Abs(r), 0.1f));
+			float s2 = 0.5f * m_splitSpacing * m_spacingDistribution.Evaluate(Mathf.Max(Mathf.Abs(r), 0.1f));
 
 			m_vertices[0].Set(-dx, dy, 0);
 			m_vertices[1].Set(Mathf.Max(dx * r - s, -dx), dy, 0);

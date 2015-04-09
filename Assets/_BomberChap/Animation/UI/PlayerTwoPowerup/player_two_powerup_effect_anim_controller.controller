@@ -5,7 +5,7 @@ AnimatorController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: powerup_effect_aim_controller
+  m_Name: player_two_powerup_effect_anim_controller
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Play
@@ -87,7 +87,7 @@ AnimatorState:
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
   m_Mirror: 0
-  m_Motion: {fileID: 7400000, guid: 8216779915b35e14fa80c0378db0ecdf, type: 2}
+  m_Motion: {fileID: 7400000, guid: 2a4775c9e6c281c428547d65acad065d, type: 2}
   m_Tag: 
 --- !u!1102 &110247716
 AnimatorState:
@@ -105,7 +105,7 @@ AnimatorState:
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
   m_Mirror: 0
-  m_Motion: {fileID: 7400000, guid: 34b8db97db07e0448804c3c755fc6f0c, type: 2}
+  m_Motion: {fileID: 7400000, guid: fcd8909de1ba9df409c444aa57515056, type: 2}
   m_Tag: 
 --- !u!1107 &110732502
 AnimatorStateMachine:

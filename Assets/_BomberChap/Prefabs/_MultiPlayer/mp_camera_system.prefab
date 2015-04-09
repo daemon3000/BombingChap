@@ -165,7 +165,7 @@ Camera:
   far clip plane: 100
   field of view: 60
   orthographic: 1
-  orthographic size: 3.5
+  orthographic size: 5
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
@@ -197,7 +197,7 @@ Camera:
   far clip plane: 100
   field of view: 60
   orthographic: 1
-  orthographic size: 3.5
+  orthographic size: 5
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -285,7 +285,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_maxVerticalDistanceInTiles: 16
-  m_splitSpacing: .00600000005
+  m_splitSpacing: .00400000019
+  m_spacingDistribution:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: .75
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: .5
+      value: .550000012
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: .949999988
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
   m_splitViewCamera: {fileID: 2095526}
   m_cameraOne: {fileID: 2093452}
   m_cameraTwo: {fileID: 2084018}

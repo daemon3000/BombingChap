@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 namespace BomberChap
@@ -7,7 +7,7 @@ namespace BomberChap
 	{
 		private void Start()
 		{
-			int gameLevel = Mathf.Max(PlayerPrefs.GetInt(PlayerPrefsKeys.GAME_LEVEL, 0), 0);
+			int gameLevel = Mathf.Max(PlayerPrefs.GetInt(PlayerPrefsKeys.SP_GAME_LEVEL, 0), 0);
 			LevelManager.LoadLevel(gameLevel, false);
 		}
 	}

@@ -19,12 +19,24 @@ namespace BomberChap
 		private float m_roundTexDuration;
 		[SerializeField]
 		private int m_maxRounds;
+		[SerializeField]
+		private float m_nextRoundDelay;
 
 		private int m_levelIndex;
 		private int m_currentRound;
 		private int m_playerOneWins;
 		private int m_playerTwoWins;
 		private bool m_registeredDeathThisRound;
+
+		public int PlayerOneWins
+		{
+			get { return m_playerOneWins; }
+		}
+
+		public int PlayerTwoWins
+		{
+			get { return m_playerTwoWins; }
+		}
 
 		private void Start()
 		{
@@ -33,12 +45,15 @@ namespace BomberChap
 			m_playerOneWins = 0;
 			m_playerTwoWins = 0;
 
-			StartCoroutine(StartNextRound());
+			StartCoroutine(StartNextRound(0.0f));
 		}
 
-		private IEnumerator StartNextRound()
+		private IEnumerator StartNextRound(float delay)
 		{
-			yield return null;
+			if(delay > 0.0f)
+				yield return new WaitForSeconds(delay);
+			else
+				yield return null;
 
 			if(m_currentRound == m_maxRounds)
 			{
@@ -84,7 +99,7 @@ namespace BomberChap
 			if(!m_registeredDeathThisRound)
 			{
 				m_registeredDeathThisRound = true;
-				StartCoroutine(StartNextRound());
+				StartCoroutine(StartNextRound(m_nextRoundDelay));
 			}
 		}
 
@@ -94,7 +109,7 @@ namespace BomberChap
 			if(!m_registeredDeathThisRound)
 			{
 				m_registeredDeathThisRound = true;
-				StartCoroutine(StartNextRound());
+				StartCoroutine(StartNextRound(m_nextRoundDelay));
 			}
 		}
 	}

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -23,7 +23,7 @@ namespace BomberChap
 			m_button = GetComponent<Button>();
 			m_button.onClick.AddListener(HandleOnClick);
 
-			int gameLevel = PlayerPrefs.GetInt(PlayerPrefsKeys.GAME_LEVEL, -1);
+			int gameLevel = PlayerPrefs.GetInt(PlayerPrefsKeys.SP_GAME_LEVEL, -1);
 			m_button.interactable = gameLevel >= 0;
 		}
 		

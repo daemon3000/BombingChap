@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 namespace BomberChap
@@ -27,7 +27,7 @@ namespace BomberChap
 
 		private void Start()
 		{
-			Score = PlayerPrefs.GetInt(PlayerPrefsKeys.SCORE, 0);
+			Score = PlayerPrefs.GetInt(PlayerPrefsKeys.SP_SCORE, 0);
 			m_currentScore = Score;
 
 			NotificationCenter.AddObserver(gameObject, Notifications.ON_POWERUP_USED);
@@ -57,7 +57,7 @@ namespace BomberChap
 		private void OnGameLevelComplete()
 		{
 			Score = m_currentScore;
-			PlayerPrefs.SetInt(PlayerPrefsKeys.SCORE, Score);
+			PlayerPrefs.SetInt(PlayerPrefsKeys.SP_SCORE, Score);
 		}
 
 		private void OnLastGameLevelComplete()

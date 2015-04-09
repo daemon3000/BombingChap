@@ -13,8 +13,12 @@ namespace BomberChap
 		{
 			m_audioSource = GetComponent<AudioSource>();
 			m_isPaused = false;
-			NotificationCenter.AddObserver(gameObject, Notifications.ON_GAME_PAUSED);
-			NotificationCenter.AddObserver(gameObject, Notifications.ON_GAME_UNPAUSED);
+
+			if(NotificationCenter.Exists)
+			{
+				NotificationCenter.AddObserver(gameObject, Notifications.ON_GAME_PAUSED);
+				NotificationCenter.AddObserver(gameObject, Notifications.ON_GAME_UNPAUSED);
+			}
 		}
 
 		private void OnDestroy()

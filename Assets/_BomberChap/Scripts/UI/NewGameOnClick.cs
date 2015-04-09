@@ -40,11 +40,11 @@ namespace BomberChap
 			m_onStartGame.Invoke();
 			yield return new WaitForSeconds(m_delay);
 
-			PlayerPrefs.SetInt(PlayerPrefsKeys.GAME_LEVEL, 0);
-			PlayerPrefs.SetInt(PlayerPrefsKeys.SCORE, 0);
-			PlayerPrefs.SetInt(PlayerPrefsKeys.BOMB_COUNT, GlobalConstants.MIN_BOMB_COUNT);
-			PlayerPrefs.SetInt(PlayerPrefsKeys.BOMB_RANGE, GlobalConstants.MIN_BOMB_RANGE);
-			PlayerPrefs.SetFloat(PlayerPrefsKeys.PLAYER_SPEED, GlobalConstants.MIN_PLAYER_SPEED);
+			PlayerPrefs.SetInt(PlayerPrefsKeys.SP_GAME_LEVEL, 0);
+			PlayerPrefs.SetInt(PlayerPrefsKeys.SP_SCORE, 0);
+			PlayerPrefs.SetInt(PlayerPrefsKeys.SP_BOMB_COUNT, GlobalConstants.MIN_BOMB_COUNT);
+			PlayerPrefs.SetInt(PlayerPrefsKeys.SP_BOMB_RANGE, GlobalConstants.MIN_BOMB_RANGE);
+			PlayerPrefs.SetFloat(PlayerPrefsKeys.SP_PLAYER_SPEED, GlobalConstants.MIN_PLAYER_SPEED);
 			
 			Application.LoadLevel(m_singlePlayerSceneName);
 		}

@@ -25,7 +25,7 @@ namespace BomberChap
 
 		private void OnTriggerEnter2D(Collider2D other)
 		{
-			if(other.tag == Tags.Player)
+			if(other.tag == Tags.Player || other.tag == Tags.PlayerOne || other.tag == Tags.PlayerTwo)
 			{
 				AudioManager.PlaySound(m_effectSound);
 				ApplyEffect(other.gameObject);

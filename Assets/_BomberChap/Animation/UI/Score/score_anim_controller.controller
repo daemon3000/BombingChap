@@ -77,7 +77,7 @@ AnimatorState:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: score
+  m_Name: play
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -95,7 +95,7 @@ AnimatorState:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: score_idle
+  m_Name: idle
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:

@@ -7,7 +7,7 @@ namespace BomberChap
 	{
 		private void OnGameLevelComplete()
 		{
-			PlayerPrefs.SetInt(PlayerPrefsKeys.GAME_LEVEL, LevelManager.LoadedLevelIndex + 1);
+			PlayerPrefs.SetInt(PlayerPrefsKeys.SP_GAME_LEVEL, LevelManager.LoadedLevelIndex + 1);
 		}
 	}
 }

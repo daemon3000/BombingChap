@@ -20,7 +20,7 @@ namespace BomberChap
 
 		private void Start()
 		{
-			int bestScore = PlayerPrefs.GetInt(PlayerPrefsKeys.BEST_SCORE, 0);
+			int bestScore = PlayerPrefs.GetInt(PlayerPrefsKeys.SP_BEST_SCORE, 0);
 			if(SinglePlayerGameController.Score > bestScore)
 			{
 				m_scoreText.text = "NEW BEST SCORE: " + SinglePlayerGameController.Score;
