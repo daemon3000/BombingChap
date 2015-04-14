@@ -28,6 +28,11 @@ namespace BomberChap
 		private int m_playerTwoWins;
 		private bool m_registeredDeathThisRound;
 
+		public int MaxRounds
+		{
+			get { return m_maxRounds; }
+		}
+
 		public int PlayerOneWins
 		{
 			get { return m_playerOneWins; }
@@ -55,7 +60,7 @@ namespace BomberChap
 			else
 				yield return null;
 
-			if(m_currentRound == m_maxRounds)
+			if(m_currentRound == m_maxRounds || m_playerOneWins > m_maxRounds / 2 || m_playerTwoWins > m_maxRounds / 2)
 			{
 				PlayerOneWon = m_playerOneWins > m_playerTwoWins;
 				PlayerTwoWon = m_playerTwoWins > m_playerOneWins;

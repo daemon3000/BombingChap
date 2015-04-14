@@ -1,0 +1,2 @@
+The audio assets were taken from the "2D Platformer" example project for Unity.
+https://www.assetstore.unity3d.com/en/#!/content/11228

@@ -14,9 +14,9 @@ namespace BomberChap
 		[SerializeField]
 		private Camera m_splitViewCamera;
 		[SerializeField]
-		private Camera m_cameraOne;
+		private SplitScreenCameraController m_cameraOneController;
 		[SerializeField]
-		private Camera m_cameraTwo;
+		private SplitScreenCameraController m_cameraTwoController;
 		[SerializeField]
 		private Material m_cameraOneMaterial;
 		[SerializeField]
@@ -36,22 +36,24 @@ namespace BomberChap
 
 		public Camera CameraOne
 		{
-			get { return m_cameraOne; }
+			get { return m_cameraOneController.Camera; }
 		}
 
 		public Camera CameraTwo
 		{
-			get { return m_cameraTwo; }
+			get { return m_cameraTwoController.Camera; }
 		}
 
 		public void SetPlayerOne(Transform playerOne)
 		{
 			m_playerOne = playerOne;
+			m_cameraOneController.SetTarget(playerOne);
 		}
 
 		public void SetPlayerTwo(Transform playerTwo)
 		{
 			m_playerTwo = playerTwo;
+			m_cameraTwoController.SetTarget(playerTwo);
 		}
 
 		public void Initialize()
@@ -64,11 +66,11 @@ namespace BomberChap
 		{
 			m_cameraOneTexture = new RenderTexture(Screen.width, Screen.height, 24, RenderTextureFormat.ARGB32, RenderTextureReadWrite.Default);
 			m_cameraOneMaterial.mainTexture = m_cameraOneTexture;
-			m_cameraOne.targetTexture = m_cameraOneTexture;
+			m_cameraOneController.Camera.targetTexture = m_cameraOneTexture;
 			
 			m_cameraTwoTexture = new RenderTexture(Screen.width, Screen.height, 24, RenderTextureFormat.ARGB32, RenderTextureReadWrite.Default);
 			m_cameraTwoMaterial.mainTexture = m_cameraTwoTexture;
-			m_cameraTwo.targetTexture = m_cameraTwoTexture;
+			m_cameraTwoController.Camera.targetTexture = m_cameraTwoTexture;
 		}
 		
 		private void InitializeMesh()
@@ -105,18 +107,17 @@ namespace BomberChap
 		{
 			float viewRatio = CalculateViewRatio();
 
-			m_cameraOneTargetPos = m_playerOne.transform.position;
-			m_cameraOneTargetPos.x += m_cameraOne.orthographicSize * m_cameraOne.aspect / 2.0f;
-			m_cameraOneTargetPos.y -= viewRatio * m_cameraOne.orthographicSize / 2.0f;
-			m_cameraOneTargetPos.z = m_cameraOne.transform.position.z;
+			Vector2 camOneOffset = m_cameraOneController.Offset;
+			Vector2 camTwoOffset = m_cameraTwoController.Offset;
 
-			m_cameraTwoTargetPos = m_playerTwo.transform.position;
-			m_cameraTwoTargetPos.x -= m_cameraTwo.orthographicSize * m_cameraTwo.aspect / 2.0f;
-			m_cameraTwoTargetPos.y += viewRatio * m_cameraTwo.orthographicSize / 2.0f;
-			m_cameraTwoTargetPos.z = m_cameraTwo.transform.position.z;
+			camOneOffset.x = m_cameraOneController.Camera.orthographicSize * m_cameraOneController.Camera.aspect / 2.0f;
+			camOneOffset.y = -viewRatio * m_cameraOneController.Camera.orthographicSize / 2.0f;
 
-			m_cameraOne.transform.position = m_cameraOneTargetPos;
-			m_cameraTwo.transform.position = m_cameraTwoTargetPos;
+			camTwoOffset.x = -m_cameraTwoController.Camera.orthographicSize * m_cameraTwoController.Camera.aspect / 2.0f;
+			camTwoOffset.y = viewRatio * m_cameraTwoController.Camera.orthographicSize / 2.0f;
+
+			m_cameraOneController.Offset = camOneOffset;
+			m_cameraTwoController.Offset = camTwoOffset;
 
 			UpdateMesh();
 		}

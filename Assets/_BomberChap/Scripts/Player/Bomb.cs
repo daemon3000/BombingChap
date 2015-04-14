@@ -18,6 +18,11 @@ namespace BomberChap
 
 		private void OnDestroy()
 		{
+			ReleaseAudioSource();
+		}
+
+		private void ReleaseAudioSource()
+		{
 			if(m_audioSource != null)
 			{
 				m_audioSource.Stop();
@@ -39,12 +44,7 @@ namespace BomberChap
 
 		private void OnPooledInstanceReset()
 		{
-			if(m_audioSource != null)
-			{
-				m_audioSource.Stop();
-				m_audioSource.loop = false;
-				m_audioSource = null;
-			}
+			ReleaseAudioSource();
 		}
 
 		private void OnTriggerEnter2D(Collider2D other)

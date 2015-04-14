@@ -6,6 +6,9 @@ namespace BomberChap
 	[RequireComponent(typeof(AudioSource))]
 	public class PauseAudio : MonoBehaviour 
 	{
+		[SerializeField]
+		private bool m_surviveLevelLoad;
+
 		private AudioSource m_audioSource;
 		private bool m_isPaused;
 
@@ -18,6 +21,7 @@ namespace BomberChap
 			{
 				NotificationCenter.AddObserver(gameObject, Notifications.ON_GAME_PAUSED);
 				NotificationCenter.AddObserver(gameObject, Notifications.ON_GAME_UNPAUSED);
+				NotificationCenter.AddObserver(gameObject, Notifications.ON_GAME_LEVEL_LOADED);
 			}
 		}
 
@@ -27,6 +31,7 @@ namespace BomberChap
 			{
 				NotificationCenter.RemoveObserver(gameObject, Notifications.ON_GAME_PAUSED);
 				NotificationCenter.RemoveObserver(gameObject, Notifications.ON_GAME_UNPAUSED);
+				NotificationCenter.RemoveObserver(gameObject, Notifications.ON_GAME_LEVEL_LOADED);
 			}
 		}
 
@@ -46,6 +51,13 @@ namespace BomberChap
 				m_audioSource.Play();
 				m_isPaused = false;
 			}
+		}
+
+		private void OnGameLevelLoaded()
+		{
+			m_isPaused = false;
+			if(m_audioSource.isPlaying)
+				m_audioSource.Stop();
 		}
 	}
 }

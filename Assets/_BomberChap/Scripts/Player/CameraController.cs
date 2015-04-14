@@ -12,6 +12,12 @@ namespace BomberChap
 		private float m_levelHeight;
 		private float m_viewWidth;
 		private float m_viewHeight;
+		private Camera m_camera;
+
+		public Camera Camera 
+		{ 
+			get { return m_camera; }
+		}
 
 		private void Start()
 		{
@@ -19,9 +25,9 @@ namespace BomberChap
 			m_levelWidth = currentLevel != null ? currentLevel.Width * currentLevel.TileWidth * currentLevel.PixelToUnit : 0;
 			m_levelHeight = currentLevel != null ? currentLevel.Height * currentLevel.TileHeight * currentLevel.PixelToUnit : 0;
 
-			Camera camera = GetComponent<Camera>();
-			m_viewHeight = camera.orthographicSize * 2;
-			m_viewWidth = m_viewHeight * camera.aspect;
+			m_camera = GetComponent<Camera>();
+			m_viewHeight = m_camera.orthographicSize * 2;
+			m_viewWidth = m_viewHeight * m_camera.aspect;
 		}
 
 		private void Update()
