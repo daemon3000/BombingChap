@@ -17,5 +17,6 @@ namespace BomberChap
 		public const int SCORE_FOR_POSITIVE_POWERUP = 100;
 		public const int SCORE_FOR_NEGATIVE_POWERUP = -50;
 		public const int SCORE_FOR_ENEMY = 100;
+		public const string DEFAULT_HIGHSCORE_NAME = "Unknown";
 	}
 }

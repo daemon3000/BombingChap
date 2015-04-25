@@ -10,7 +10,8 @@ namespace BomberChap
 		public const string SP_BOMB_COUNT = "MaxBombs";
 		public const string SP_BOMB_RANGE = "BombRange";
 		public const string SP_SCORE = "Score";
-		public const string SP_BEST_SCORE = "BestScore";
 		public const string MUSIC = "Music";
+		public const string HIGHSCORE_NAME = "Highscore_{0}_Name";
+		public const string HIGHSCORE_VALUE = "Highscore_{0}_Value";
 	}
 }
