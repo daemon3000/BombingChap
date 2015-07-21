@@ -4,38 +4,38 @@ using System.Collections;
 
 namespace BomberChap
 {
-	[RequireComponent(typeof(Button))]
 	public class LoadSceneOnClick : MonoBehaviour 
 	{
 		[SerializeField]
 		private string m_sceneName;
-
 		[SerializeField]
 		private float m_delay;
-
 		[SerializeField]
 		private bool m_ignoreTimescale;
+		[SerializeField]
+		private bool m_subscribeAutomatically = true;
 
 		private Button m_button;
 
 		private void Awake()
 		{
 			m_button = GetComponent<Button>();
-			m_button.onClick.AddListener(HandleOnClick);
+			if(m_button != null && m_subscribeAutomatically)
+				m_button.onClick.AddListener(LoadScene);
 		}
 
 		private void OnDestroy()
 		{
-			if(m_button != null)
-				m_button.onClick.RemoveListener(HandleOnClick);
+			if(m_button != null && m_subscribeAutomatically)
+				m_button.onClick.RemoveListener(LoadScene);
 		}
 
-		private void HandleOnClick()
+		public void LoadScene()
 		{
-			StartCoroutine(LoadScene());
+			StartCoroutine(LoadSceneInternal());
 		}
 
-		private IEnumerator LoadScene()
+		private IEnumerator LoadSceneInternal()
 		{
 			if(m_ignoreTimescale)
 			{

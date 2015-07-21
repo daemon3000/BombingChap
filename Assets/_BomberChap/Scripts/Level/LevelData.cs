@@ -21,6 +21,7 @@ namespace BomberChap
 		public Vector2 secondaryPlayerPosition;
 		public Vector2[] enemyPositions;
 		public bool isMultiPlayerLevel;
+		public bool isOnlineMultiPlayerLevel;
 
 		public void SetDefault()
 		{

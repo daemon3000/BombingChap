@@ -17,3 +17,9 @@ EditorBuildSettings:
     path: Assets/_BomberChap/Scenes/mp_main.unity
   - enabled: 1
     path: Assets/_BomberChap/Scenes/mp_win.unity
+  - enabled: 1
+    path: Assets/_BomberChap/Scenes/mp_online_host.unity
+  - enabled: 1
+    path: Assets/_BomberChap/Scenes/mp_online_join.unity
+  - enabled: 1
+    path: Assets/_BomberChap/Scenes/mp_online_room_lobby.unity
