@@ -37,13 +37,16 @@ namespace BomberChap
 
 			foreach(var room in m_roomList)
 			{
+				if(!room.visible)
+					continue;
+
 				GameObject entryGO = GameObject.Instantiate<GameObject>(m_roomEntryPrefab);
 				entryGO.transform.SetParent(m_roomEntryRoot, false);
 				
 				OnlineRoomEntry entry = entryGO.GetComponent<OnlineRoomEntry>();
-				entry.RoomName = string.Format("{0}'S GAME - {1}/{2}", room.name, room.playerCount, room.maxPlayers);
+				entry.RoomName = string.Format("{0} - {1}/{2}", room.name.ToUpperInvariant(), room.playerCount, room.maxPlayers);
 				entry.RoomID = room.name;
-				entry.SetIsFull(room.playerCount == room.maxPlayers);
+				entry.SetIsFull(room.playerCount == room.maxPlayers || !room.open);
 				entry.JoinRoom += (obj) => {
 					if(!m_isTryingToJoinRoom)
 					{

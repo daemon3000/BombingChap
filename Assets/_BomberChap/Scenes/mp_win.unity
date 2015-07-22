@@ -304,6 +304,7 @@ MonoBehaviour:
   m_sceneName: mp_main
   m_delay: .5
   m_ignoreTimescale: 1
+  m_subscribeAutomatically: 1
 --- !u!114 &806827700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,7 +358,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: .8482759, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FontData:
     m_Font: {fileID: 12800000, guid: 86cb4117307ec5144b4304ebdfcdc2be, type: 3}
     m_FontSize: 36
@@ -589,6 +590,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c072f089e9b387440a264c41f0ed0609, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_isOnlineMatch: 0
 --- !u!1 &1819646764
 GameObject:
   m_ObjectHideFlags: 0
@@ -653,6 +655,7 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
+  m_StereoMirrorMode: 0
 --- !u!4 &1819646768
 Transform:
   m_ObjectHideFlags: 0
@@ -858,7 +861,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: .8482759, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FontData:
     m_Font: {fileID: 12800000, guid: 86cb4117307ec5144b4304ebdfcdc2be, type: 3}
     m_FontSize: 30
@@ -892,6 +895,7 @@ MonoBehaviour:
   m_sceneName: main_menu
   m_delay: .5
   m_ignoreTimescale: 1
+  m_subscribeAutomatically: 1
 --- !u!114 &2086984834
 MonoBehaviour:
   m_ObjectHideFlags: 0

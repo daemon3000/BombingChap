@@ -10,7 +10,6 @@ namespace BomberChap
 		private TilemapMesh m_tilemapMesh;
 		private Tileset m_tileset;
 		private PrefabSet m_prefabSet;
-		private GameObjectPool m_flamePool;
 		private int[] m_map;
 		private int m_width;
 		private int m_height;
@@ -46,12 +45,15 @@ namespace BomberChap
 			get { return m_allocatedTime; }
 		}
 
+		public PrefabSet PrefabSet
+		{
+			get { return m_prefabSet; }
+		}
+
 		private void OnDestroy()
 		{
 			if(m_tilemapMesh != null)
 				m_tilemapMesh.Dispose();
-			if(m_flamePool != null)
-				m_flamePool.Clear(true);
 			m_tilemapMesh = null;
 			m_map = null;
 			m_tileset = null;
@@ -81,27 +83,39 @@ namespace BomberChap
 			m_height = levelData.height;
 			m_allocatedTime = levelData.allocatedTime;
 			m_map = (int[])levelData.map.Clone();
-#if UNITY_EDITOR
-			if(UnityEditor.EditorApplication.isPlaying)
-				m_flamePool = new GameObjectPool(m_prefabSet.flame);
-#else
-			m_flamePool = new GameObjectPool(m_prefabSet.flame);
-#endif
 
 			BuildTilemapMesh();
 			if(levelData.isMultiPlayerLevel)
 			{
-				CreateSplitScreenPlayersAndCamera(prefabSet.mpPlayerOne, 
-				                                  prefabSet.mpPlayerTwo,
-				                                  prefabSet.mpCameraSystem,
-				                                  levelData.primaryPlayerPosition,
-				                                  levelData.secondaryPlayerPosition);
+				if(levelData.isOnlineMultiPlayerLevel)
+				{
+#if UNITY_EDITOR
+					if(!UnityEditor.EditorApplication.isPlaying)
+						return;
+#endif
+					if(PhotonNetwork.isMasterClient)
+					{
+						CreateOnlinePlayerAndCamera(prefabSet.mpOnlinePlayerOnePath, prefabSet.mpOnlineCamera, levelData.primaryPlayerPosition);
+					}
+					else
+					{
+						CreateOnlinePlayerAndCamera(prefabSet.mpOnlinePlayerTwoPath, prefabSet.mpOnlineCamera, levelData.secondaryPlayerPosition);
+					}
+				}
+				else
+				{
+					CreateSplitScreenPlayersAndCamera(prefabSet.mpPlayerOne, 
+					                                  prefabSet.mpPlayerTwo,
+					                                  prefabSet.mpCameraSystem,
+					                                  levelData.primaryPlayerPosition,
+					                                  levelData.secondaryPlayerPosition);
+				}
 			}
 			else
 			{
 				CreatePlayerAndCamera(prefabSet.spPlayer, prefabSet.spCamera, levelData.primaryPlayerPosition);
+				CreateEnemies(levelData.enemyPositions);
 			}
-			CreateEnemies(levelData.enemyPositions);
 		}
 
 		private void BuildTilemapMesh()
@@ -157,13 +171,11 @@ namespace BomberChap
 			m_tilemapMesh.UpdateMesh();
 		}
 
-		private void CreatePlayerAndCamera(GameObject playerPrefab, GameObject cameraPrefab, Vector2 tilePos)
+		private void CreateOnlinePlayerAndCamera(string playerPrefabPath, GameObject cameraPrefab, Vector2 tilePos)
 		{
-			GameObject playerGO = GameObject.Instantiate(playerPrefab) as GameObject;
-			playerGO.name = playerPrefab.name;
-			playerGO.transform.SetParent(transform, false);
-			playerGO.transform.position = TileToWorld(tilePos, -1.0f);
+			GameObject playerGO = PhotonNetwork.Instantiate(playerPrefabPath, TileToWorld(tilePos, -1.0f), Quaternion.identity, 0);
 			PlayerController playerController = playerGO.GetComponent<PlayerController>();
+			playerController.transform.SetParent(transform, true);
 
 			GameObject cameraGO = GameObject.Instantiate(cameraPrefab) as GameObject;
 			cameraGO.name = cameraPrefab.name;
@@ -207,6 +219,30 @@ namespace BomberChap
 			playerTwoController.Camera = splitScreenView.CameraTwo;
 		}
 
+		private void CreatePlayerAndCamera(GameObject playerPrefab, GameObject cameraPrefab, Vector2 tilePos)
+		{
+			GameObject playerGO = GameObject.Instantiate(playerPrefab) as GameObject;
+			playerGO.name = playerPrefab.name;
+			playerGO.transform.SetParent(transform, false);
+			playerGO.transform.position = TileToWorld(tilePos, -1.0f);
+			PlayerController playerController = playerGO.GetComponent<PlayerController>();
+			
+			GameObject cameraGO = GameObject.Instantiate(cameraPrefab) as GameObject;
+			cameraGO.name = cameraPrefab.name;
+			cameraGO.transform.SetParent(transform, false);
+			cameraGO.transform.position = new Vector3(playerGO.transform.position.x, playerGO.transform.position.y, -10);
+			CameraController camController = cameraGO.GetComponent<CameraController>();
+			if(camController != null)
+			{
+				camController.SetTarget(playerGO.transform);
+				playerController.Camera = cameraGO.GetComponent<Camera>();
+			}
+			else
+			{
+				Debug.LogWarning("The camera prefab doesn't have a camera controller component");
+			}
+		}
+
 		private void CreateEnemies(Vector2[] positions)
 		{
 			for(int i = 0; i < positions.Length; i++)
@@ -216,6 +252,11 @@ namespace BomberChap
 				enemyGO.transform.SetParent(transform, false);
 				enemyGO.transform.position = TileToWorld(positions[i], -1.0f);
 			}
+		}
+
+		public void UpdateTilemapMesh()
+		{
+			m_tilemapMesh.UpdateMesh();
 		}
 
 		public void SetAt(int c, int r, int tileType, bool updateMesh)
@@ -288,146 +329,6 @@ namespace BomberChap
 				return new Vector3(0, 0, z);
 			else
 				return new Vector3(c * m_tileset.tileWidth * PixelToUnit, -r * m_tileset.tileHeight * PixelToUnit, z);
-		}
-
-		public void OnBombExplosion(Vector3 worldPos, int range)
-		{
-			Vector2 tilePos = WorldToTile(worldPos);
-			int sr = Mathf.Max((int)tilePos.y - range / 2, 0);
-			int er = Mathf.Min((int)tilePos.y + range / 2, m_height - 1);
-			int sc = Mathf.Max((int)tilePos.x - range / 2, 0);
-			int ec = Mathf.Min((int)tilePos.x + range / 2, m_width - 1);
-			
-			DestroyTileAndSpawnFlameAt((int)tilePos.x, (int)tilePos.y);
-			for(int r = (int)tilePos.y - 1; r >= sr; r--) {
-				if(!DestroyTileAndSpawnFlameAt((int)tilePos.x, r))
-					break;
-			}
-			for(int r = (int)tilePos.y + 1; r <= er; r++) {
-				if(!DestroyTileAndSpawnFlameAt((int)tilePos.x, r))
-					break;
-			}
-			for(int c = (int)tilePos.x - 1; c >= sc; c--) {
-				if(!DestroyTileAndSpawnFlameAt(c, (int)tilePos.y))
-					break;
-			}
-			for(int c = (int)tilePos.x + 1; c <= ec; c++) {
-				if(!DestroyTileAndSpawnFlameAt(c, (int)tilePos.y))
-					break;
-			}
-
-			m_tilemapMesh.UpdateMesh();
-		}
-
-		private bool DestroyTileAndSpawnFlameAt(int c, int r)
-		{
-			Tile tile = GetAt(c, r);
-			if(tile == null)
-				return false;
-
-			Vector3 worldPos = TileToWorld(c, r, -1.0f);
-			bool continueFlameChain = true;
-			if(tile.IsSolid) 
-			{
-				if(tile.IsDestructible) 
-				{
-					SetAt(c, r, Tiles.GROUND, false);
-					switch(tile.Type) 
-					{
-					case Tiles.DESTRUCTIBLE_WALL:
-						CreateFlame(worldPos);
-						break;
-					case Tiles.PORTAL:
-						CreatePortal(worldPos);
-						break;
-					case Tiles.RANDOM_POWERUP:
-						if(!CreatePowerup(worldPos))
-							CreateFlame(worldPos);
-						break;
-					default:
-						CreateFlame(worldPos);
-						break;
-					}
-				}
-				else 
-				{
-					continueFlameChain = false;
-				}
-			}
-			else 
-			{
-				CreateFlame(worldPos);
-			}
-			
-			return continueFlameChain;
-		}
-
-		private void CreateFlame(Vector3 position)
-		{
-			GameObject flameGO = m_flamePool.Get();
-			flameGO.transform.SetParent(transform, false);
-			flameGO.transform.position = position;
-			
-			Flame flame = flameGO.GetComponent<Flame>();
-			flame.Extinguished += HandleFlameExtinguished;
-		}
-
-		private void HandleFlameExtinguished(Flame flame)
-		{
-			flame.Extinguished -= HandleFlameExtinguished;
-			m_flamePool.Free(flame.gameObject);
-		}
-
-		private void CreatePortal(Vector3 worldPos)
-		{
-			GameObject portalGO = GameObject.Instantiate(m_prefabSet.portal) as GameObject;
-			portalGO.transform.SetParent(transform, false);
-			portalGO.transform.position = worldPos;
-		}
-
-		private bool CreatePowerup(Vector3 worldPos)
-		{
-			GameObject prefab = GetRandomPowerupPrefab();
-			if(prefab != null)
-			{
-				GameObject powerupGO = GameObject.Instantiate(prefab) as GameObject;
-				powerupGO.transform.SetParent(transform, false);
-				powerupGO.transform.position = worldPos;
-			}
-
-			return prefab != null;
-		}
-
-		private GameObject GetRandomPowerupPrefab()
-		{
-			PowerupEffect effect = Utils.GetRandomEnum<PowerupEffect>();
-			GameObject prefab = null;
-
-			switch(effect) 
-			{
-			case PowerupEffect.BombCountUp:
-				prefab = m_prefabSet.bombUpPowerup;
-				break;
-			case PowerupEffect.BombCountDown:
-				prefab = m_prefabSet.bombDownPowerup;
-				break;
-			case PowerupEffect.BombRangeUp:
-				prefab = m_prefabSet.rangeUpPowerup;
-				break;
-			case PowerupEffect.BombRangeDown:
-				prefab = m_prefabSet.rangeDownPowerup;
-				break;
-			case PowerupEffect.SpeedUp:
-				prefab = m_prefabSet.speedUpPowerup;
-				break;
-			case PowerupEffect.SpeedDown:
-				prefab = m_prefabSet.speedDownPowerup;
-				break;
-			default:
-				break;
-			}
-
-			return prefab;
 		}
 	}
 }

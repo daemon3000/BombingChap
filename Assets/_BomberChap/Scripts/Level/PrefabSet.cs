@@ -21,5 +21,15 @@ namespace BomberChap
 		public GameObject rangeDownPowerup;
 		public GameObject speedUpPowerup;
 		public GameObject speedDownPowerup;
+
+		public GameObject mpOnlineCamera;
+		public string mpOnlinePlayerOnePath;
+		public string mpOnlinePlayerTwoPath;
+		public string mpOnlineBombUpPowerupPath;
+		public string mpOnlineBombDownPowerupPath;
+		public string mpOnlineRangeUpPowerupPath;
+		public string mpOnlineRangeDownPowerupPath;
+		public string mpOnlineSpeedUpPowerupPath;
+		public string mpOnlineSpeedDownPowerupPath;
 	}
 }

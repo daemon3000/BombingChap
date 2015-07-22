@@ -271,7 +271,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &421755199
 RectTransform:
   m_ObjectHideFlags: 0
@@ -284,10 +284,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 882951499}
   m_RootOrder: 0
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 100, y: -32.5}
+  m_SizeDelta: {x: 200, y: 45}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &421755200
 MonoBehaviour:
@@ -353,11 +353,33 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 421755203}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 171693255}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1619605213}
+        m_MethodName: StartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &421755203
@@ -372,7 +394,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: .8482759, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FontData:
     m_Font: {fileID: 12800000, guid: 86cb4117307ec5144b4304ebdfcdc2be, type: 3}
     m_FontSize: 30
@@ -402,9 +424,6 @@ GameObject:
   - 224: {fileID: 839439400}
   - 222: {fileID: 839439405}
   - 114: {fileID: 839439404}
-  - 114: {fileID: 839439403}
-  - 114: {fileID: 839439402}
-  - 114: {fileID: 839439401}
   m_Layer: 5
   m_Name: room_status
   m_TagString: Untagged
@@ -429,77 +448,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -9}
   m_SizeDelta: {x: 0, y: 45}
   m_Pivot: {x: .5, y: .5}
---- !u!114 &839439401
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 839439399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1679637790, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreLayout: 0
-  m_MinWidth: -1
-  m_MinHeight: 45
-  m_PreferredWidth: 200
-  m_PreferredHeight: -1
-  m_FlexibleWidth: -1
-  m_FlexibleHeight: -1
---- !u!114 &839439402
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 839439399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb65157539263154a8caba482d72e8d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_audioSource: {fileID: 171693260}
---- !u!114 &839439403
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 839439399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: .8482759, b: 0, a: 1}
-    m_HighlightedColor: {r: 1, g: .8482759, b: 0, a: 1}
-    m_PressedColor: {r: 1, g: 0, b: .455172539, a: 1}
-    m_DisabledColor: {r: .588235259, g: .588235259, b: .588235259, a: .419607848}
-    m_ColorMultiplier: 1
-    m_FadeDuration: .100000001
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 839439404}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &839439404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -693,9 +641,6 @@ GameObject:
   - 224: {fileID: 993513277}
   - 222: {fileID: 993513282}
   - 114: {fileID: 993513281}
-  - 114: {fileID: 993513280}
-  - 114: {fileID: 993513279}
-  - 114: {fileID: 993513278}
   m_Layer: 5
   m_Name: room_name
   m_TagString: Untagged
@@ -720,77 +665,6 @@ RectTransform:
   m_AnchoredPosition: {x: 1.52587891e-05, y: 35}
   m_SizeDelta: {x: 0, y: 45}
   m_Pivot: {x: .5, y: .5}
---- !u!114 &993513278
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 993513276}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1679637790, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreLayout: 0
-  m_MinWidth: -1
-  m_MinHeight: 45
-  m_PreferredWidth: 200
-  m_PreferredHeight: -1
-  m_FlexibleWidth: -1
-  m_FlexibleHeight: -1
---- !u!114 &993513279
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 993513276}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb65157539263154a8caba482d72e8d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_audioSource: {fileID: 171693260}
---- !u!114 &993513280
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 993513276}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: .8482759, b: 0, a: 1}
-    m_HighlightedColor: {r: 1, g: .8482759, b: 0, a: 1}
-    m_PressedColor: {r: 1, g: 0, b: .455172539, a: 1}
-    m_DisabledColor: {r: .588235259, g: .588235259, b: .588235259, a: .419607848}
-    m_ColorMultiplier: 1
-    m_FadeDuration: .100000001
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 993513281}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &993513281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -945,6 +819,49 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1157643272}
+--- !u!1 &1387021951
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1387021953}
+  - 114: {fileID: 1387021952}
+  m_Layer: 0
+  m_Name: load_main_menu
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1387021952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1387021951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a88a07d0a7c72d14385804454f693459, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_sceneName: main_menu
+  m_delay: .5
+  m_ignoreTimescale: 1
+  m_subscribeAutomatically: 0
+--- !u!4 &1387021953
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1387021951}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1619605212}
+  m_RootOrder: 0
 --- !u!1 &1619605211
 GameObject:
   m_ObjectHideFlags: 0
@@ -971,7 +888,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1387021953}
   m_Father: {fileID: 0}
   m_RootOrder: 3
 --- !u!114 &1619605213
@@ -990,10 +908,11 @@ MonoBehaviour:
   m_startGameButton: {fileID: 421755202}
   m_roomFullStatus: WAITING FOR HOST TO START GAME
   m_roomNotFullStatus: WAITING FOR PLAYERS
+  m_gameSceneName: mp_online_main
   onDisconnectedFromServer:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1619605214}
+      - m_Target: {fileID: 1387021952}
         m_MethodName: LoadScene
         m_Mode: 1
         m_Arguments:
@@ -1025,13 +944,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1619605211}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a88a07d0a7c72d14385804454f693459, type: 3}
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_sceneName: main_menu
-  m_delay: .5
-  m_ignoreTimescale: 1
-  m_subscribeAutomatically: 0
+  ownerId: 0
+  group: 0
+  prefixBackup: -1
+  observed: {fileID: 0}
+  synchronization: 0
+  onSerializeTransformOption: 3
+  onSerializeRigidBodyOption: 2
+  ownershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 0}
+  ObservedComponentsFoldoutOpen: 1
+  viewIdField: 1
+  instantiationId: 1
+  isRuntimeInstantiated: 0
 --- !u!1 &1819646764
 GameObject:
   m_ObjectHideFlags: 0
@@ -1303,7 +1232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: .8482759, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FontData:
     m_Font: {fileID: 12800000, guid: 86cb4117307ec5144b4304ebdfcdc2be, type: 3}
     m_FontSize: 30

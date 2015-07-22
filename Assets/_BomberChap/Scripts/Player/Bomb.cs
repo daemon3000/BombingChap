@@ -4,10 +4,8 @@ using System.Collections;
 
 namespace BomberChap
 {
-	public class Bomb : MonoBehaviour 
+	public class Bomb : BombBase
 	{
-		public event Action<Bomb> Exploded;
-
 		[SerializeField]
 		private float m_lifeSpan;
 
@@ -38,8 +36,7 @@ namespace BomberChap
 				m_audioSource.loop = true;
 
 			yield return new WaitForSeconds(m_lifeSpan);
-			if(Exploded != null)
-				Exploded(this);
+			RaiseExplodedEvent();
 		}
 
 		private void OnPooledInstanceReset()
@@ -52,8 +49,7 @@ namespace BomberChap
 			if(other.tag == Tags.Flame)
 			{
 				StopAllCoroutines();
-				if(Exploded != null)
-					Exploded(this);
+				RaiseExplodedEvent();
 			}
 		}
 	}

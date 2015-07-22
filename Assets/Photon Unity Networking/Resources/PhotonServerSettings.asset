@@ -33,4 +33,17 @@ MonoBehaviour:
   - PunRespawn
   - RequestForPickupTimes
   - TaggedPlayer
+  - LoadSceneRPC
+  - OnStartGame
+  - LoadLevel
+  - OnDropBomb
+  - OnBombExploded
+  - OnBombExplodedRPC
+  - OnPlayerOneDeadRPC
+  - OnPlayerTwoDeadRPC
+  - OnSetLevelIndexRPC
+  - OnStartGameRPC
+  - OnStartNextRoundRPC
+  - OnLoadWinSceneRPC
+  - OnCreatePowerupRPC
   DisableAutoOpenWizard: 1

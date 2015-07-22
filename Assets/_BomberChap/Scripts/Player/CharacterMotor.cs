@@ -17,7 +17,7 @@ namespace BomberChap
 			set { m_speed = Math.Max(value, 0.0f); }
 		}
 
-		private void Awake()
+		private void Start()
 		{
 			IsAtDestination = true;
 		}

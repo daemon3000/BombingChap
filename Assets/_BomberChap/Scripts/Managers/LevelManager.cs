@@ -76,6 +76,7 @@ namespace BomberChap
 		{
 			if(m_loadedLevel != null)
 			{
+				NotificationCenter.Dispatch(Notifications.ON_GAME_LEVEL_WILL_UNLOAD);
 				GameObject.Destroy(m_loadedLevel.gameObject);
 				m_loadedLevelIndex = -1;
 			}

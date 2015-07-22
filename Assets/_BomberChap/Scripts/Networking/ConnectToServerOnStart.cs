@@ -12,7 +12,14 @@ namespace BomberChap
 
 		private void Start()
 		{
-			PhotonNetwork.ConnectUsingSettings(GameVersion.VERSION);
+			if(!PhotonNetwork.connected)
+			{
+				PhotonNetwork.ConnectUsingSettings(GameVersion.VERSION);
+			}
+			else
+			{
+				onConnectedToServer.Invoke();
+			}
 		}
 
 		public override void OnFailedToConnectToPhoton(DisconnectCause cause)

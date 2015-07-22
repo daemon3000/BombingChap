@@ -265,7 +265,7 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ea1a13a4dc3f0e7448ebabd1349785a4, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &408325004
+--- !u!114 &408325004 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11439124, guid: ea1a13a4dc3f0e7448ebabd1349785a4,
     type: 2}
@@ -368,6 +368,7 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
+  m_StereoMirrorMode: 0
 --- !u!4 &605413073
 Transform:
   m_ObjectHideFlags: 0

@@ -6,9 +6,6 @@ namespace BomberChap
 {
 	public class MultiplayerGameController : MonoBehaviour 
 	{
-		public static bool PlayerOneWon = false;
-		public static bool PlayerTwoWon = false;
-
 		[SerializeField]
 		private ScreenFader m_screenFader;
 		[SerializeField]
@@ -62,8 +59,8 @@ namespace BomberChap
 
 			if(m_currentRound == m_maxRounds || m_playerOneWins > m_maxRounds / 2 || m_playerTwoWins > m_maxRounds / 2)
 			{
-				PlayerOneWon = m_playerOneWins > m_playerTwoWins;
-				PlayerTwoWon = m_playerTwoWins > m_playerOneWins;
+				Globals.SetBool(GlobalKeys.PLAYER_ONE_WON, m_playerOneWins > m_playerTwoWins);
+				Globals.SetBool(GlobalKeys.PLAYER_TWO_WON, m_playerTwoWins > m_playerOneWins);
 				NotificationCenter.Dispatch(Notifications.ON_MULTI_PLAYER_MATCH_OVER);
 				yield break;
 			}

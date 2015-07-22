@@ -23,3 +23,11 @@ EditorBuildSettings:
     path: Assets/_BomberChap/Scenes/mp_online_join.unity
   - enabled: 1
     path: Assets/_BomberChap/Scenes/mp_online_room_lobby.unity
+  - enabled: 1
+    path: Assets/_BomberChap/Scenes/mp_online_main.unity
+  - enabled: 1
+    path: Assets/_BomberChap/Scenes/mp_online_win.unity
+  - enabled: 1
+    path: Assets/_BomberChap/Scenes/mp_online_disconnected_from_server.unity
+  - enabled: 1
+    path: Assets/_BomberChap/Scenes/mp_online_player_disconnected.unity
