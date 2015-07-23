@@ -175,7 +175,7 @@ MonoBehaviour:
   onSerializeRigidBodyOption: 2
   ownershipTransfer: 0
   ObservedComponents:
-  - {fileID: 449318}
+  - {fileID: 11471384}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1
@@ -246,6 +246,9 @@ MonoBehaviour:
   m_playerController: {fileID: 11468352}
   m_bombManager: {fileID: 11432584}
   m_collider: {fileID: 6123902}
+  m_motor: {fileID: 11404152}
+  m_animator: {fileID: 9543674}
+  m_animatorParameters: {fileID: 11453894}
 --- !u!114 &11479370
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -329,7 +332,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: ObservedComponents.Array.data[0]
       value: 
-      objectReference: {fileID: 449318}
+      objectReference: {fileID: 11471384}
     - target: {fileID: 0}
       propertyPath: m_bombPrefabPath
       value: mp_online_bomb
@@ -366,6 +369,18 @@ Prefab:
       propertyPath: onSerializeTransformOption
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_motor
+      value: 
+      objectReference: {fileID: 11404152}
+    - target: {fileID: 0}
+      propertyPath: m_animator
+      value: 
+      objectReference: {fileID: 9543674}
+    - target: {fileID: 0}
+      propertyPath: m_animatorParameters
+      value: 
+      objectReference: {fileID: 11453894}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 128076}

@@ -65,6 +65,7 @@ namespace BomberChap
 					m_motor.SetDestination(m_currentLevel.TileToWorld((int)tilePos.x, (int)tilePos.y - 1, transform.position.z));
 					if(v != m_lastVDir)
 						m_animator.SetTrigger(m_animParam.StartMoveUp);
+					SendMessage("OnPlayerChangedDestination", new object[] { m_motor.Destination, h, v, m_lastHDir, m_lastVDir }, SendMessageOptions.DontRequireReceiver);
 				}
 				else
 				{
@@ -79,6 +80,7 @@ namespace BomberChap
 					m_motor.SetDestination(m_currentLevel.TileToWorld((int)tilePos.x, (int)tilePos.y + 1, transform.position.z));
 					if(v != m_lastVDir)
 						m_animator.SetTrigger(m_animParam.StartMoveDown);
+					SendMessage("OnPlayerChangedDestination", new object[] { m_motor.Destination, h, v, m_lastHDir, m_lastVDir }, SendMessageOptions.DontRequireReceiver);
 				}
 				else
 				{
@@ -93,6 +95,7 @@ namespace BomberChap
 					m_motor.SetDestination(m_currentLevel.TileToWorld((int)tilePos.x + 1, (int)tilePos.y, transform.position.z));
 					if(h != m_lastHDir)
 						m_animator.SetTrigger(m_animParam.StartMoveRight);
+					SendMessage("OnPlayerChangedDestination", new object[] { m_motor.Destination, h, v, m_lastHDir, m_lastVDir }, SendMessageOptions.DontRequireReceiver);
 				}
 				else
 				{
@@ -101,12 +104,14 @@ namespace BomberChap
 			}
 			else if(h < 0) 
 			{
+
 				Tile tile = m_currentLevel.GetAt((int)tilePos.x - 1, (int)tilePos.y);
 				if(tile != null && !tile.IsSolid)
 				{
 					m_motor.SetDestination(m_currentLevel.TileToWorld((int)tilePos.x - 1, (int)tilePos.y, transform.position.z));
 					if(h != m_lastHDir)
 						m_animator.SetTrigger(m_animParam.StartMoveLeft);
+					SendMessage("OnPlayerChangedDestination", new object[] { m_motor.Destination, h, v, m_lastHDir, m_lastVDir }, SendMessageOptions.DontRequireReceiver);
 				}
 				else
 				{
