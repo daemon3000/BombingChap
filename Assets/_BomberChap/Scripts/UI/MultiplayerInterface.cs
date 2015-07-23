@@ -7,17 +7,13 @@ namespace BomberChap
 	public class MultiplayerInterface : MonoBehaviour 
 	{
 		[SerializeField]
-		private MultiplayerGameController gameController;
-
+		private MultiplayerGameControllerBase m_gameController;
 		[SerializeField]
 		private Text m_playerOneWinsText;
-		
 		[SerializeField]
 		private Text m_playerTwoWinsText;
-
 		[SerializeField]
 		private Text m_playerOnePowerupText;
-
 		[SerializeField]
 		private Text m_playerTwoPowerupText;
 
@@ -44,16 +40,17 @@ namespace BomberChap
 
 		private void OnGameLevelLoaded()
 		{
-			m_playerOneWinsText.text = "WINS: " + gameController.PlayerOneWins;
-			m_playerTwoWinsText.text = "WINS: " + gameController.PlayerTwoWins;
+			m_playerOneWinsText.text = "WINS: " + m_gameController.PlayerOneWins;
+			m_playerTwoWinsText.text = "WINS: " + m_gameController.PlayerTwoWins;
 		}
 		
 		private void OnPowerupUsed(object arg)
 		{
 			PowerupEvent evt = (PowerupEvent)arg;
-			PlayerStats playerStats = evt.target.GetComponent<PlayerStats>();
-			Text powerupText = (evt.target.tag == Tags.PlayerOne) ? m_playerOnePowerupText : m_playerTwoPowerupText;
-			Animator powerupTextAnimator = (evt.target.tag == Tags.PlayerOne) ? m_playerOnePowerupTextAnimator : m_playerTwoPowerupTextAnimator;
+			Text powerupText = (evt.playerTag == Tags.PlayerOne) ? m_playerOnePowerupText : m_playerTwoPowerupText;
+			Animator powerupTextAnimator = (evt.playerTag == Tags.PlayerOne) ? m_playerOnePowerupTextAnimator : m_playerTwoPowerupTextAnimator;
+			GameObject playerGO = GameObject.FindGameObjectWithTag(evt.playerTag);
+			PlayerStats playerStats = playerGO.GetComponent<PlayerStats>();
 
 			switch (evt.effect) 
 			{

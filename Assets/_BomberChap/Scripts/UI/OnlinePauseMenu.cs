@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace BomberChap
 {
-	public class MP_PauseMenu : MonoBehaviour 
+	public class OnlinePauseMenu : MonoBehaviour 
 	{
 		[SerializeField]
 		private Canvas m_canvas;

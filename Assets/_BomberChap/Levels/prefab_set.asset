@@ -14,9 +14,6 @@ MonoBehaviour:
   tilemapRenderer: {fileID: 136834, guid: ee51a3342b794f94a849ad849d615c9b, type: 2}
   spPlayer: {fileID: 128076, guid: 94e6ee4d00ac0754088baa58d427cd30, type: 2}
   spCamera: {fileID: 125808, guid: 7e62c4d0af3c90e48b6875c193aa9d96, type: 2}
-  mpOnlinePlayerOnePath: mp_online_player_one
-  mpOnlinePlayerTwoPath: mp_online_player_two
-  mpOnlineCamera: {fileID: 125808, guid: e8b517f99b2201e44a4eca959dfb016e, type: 2}
   mpPlayerOne: {fileID: 128076, guid: d2f2a3918ae1e024dba775428d6c3eb4, type: 2}
   mpPlayerTwo: {fileID: 128076, guid: db25a8b8680081e45b2b7cc55c330d9b, type: 2}
   mpCameraSystem: {fileID: 131416, guid: 968937770077150458beb5aa3750ef42, type: 2}
@@ -29,3 +26,12 @@ MonoBehaviour:
   rangeDownPowerup: {fileID: 189954, guid: 4ac1fc27500891342812df931292027b, type: 2}
   speedUpPowerup: {fileID: 126966, guid: 135c0b53bc8fde941bd00f871e54b7e6, type: 2}
   speedDownPowerup: {fileID: 187334, guid: 882277cb1f45ba1459534f26b5da8c02, type: 2}
+  mpOnlineCamera: {fileID: 125808, guid: e8b517f99b2201e44a4eca959dfb016e, type: 2}
+  mpOnlinePlayerOnePath: mp_online_player_one
+  mpOnlinePlayerTwoPath: mp_online_player_two
+  mpOnlineBombUpPowerupPath: mp_online_bomb_up_powerup
+  mpOnlineBombDownPowerupPath: mp_online_bomb_down_powerup
+  mpOnlineRangeUpPowerupPath: mp_online_range_up_powerup
+  mpOnlineRangeDownPowerupPath: mp_online_range_down_powerup
+  mpOnlineSpeedUpPowerupPath: mp_online_speed_up_powerup
+  mpOnlineSpeedDownPowerupPath: mp_online_speed_down_powerup

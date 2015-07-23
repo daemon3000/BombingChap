@@ -60,17 +60,17 @@ namespace BomberChap
 
 		protected override bool CreatePowerup(Vector3 worldPos)
 		{
-//			m_photonView.RPC("OnCreatePowerupRPC", PhotonTargets.All, worldPos, Utils.GetRandomEnum<PowerupEffect>());
-//			return true;
-			return false;
+			if(m_photonView.isMine)
+				m_photonView.RPC("OnCreatePowerupRPC", PhotonTargets.All, worldPos, (int)Utils.GetRandomEnum<PowerupEffect>());
+			return true;
 		}
 
 		[PunRPC]
-		private void OnCreatePowerupRPC(Vector3 worldPos, PowerupEffect effect)
+		private void OnCreatePowerupRPC(Vector3 worldPos, int effect)
 		{
 			if(m_photonView.isMine)
 			{
-				string prefabPath = GetPowerupPrefabPath(effect);
+				string prefabPath = GetPowerupPrefabPath((PowerupEffect)effect);
 				if(!string.IsNullOrEmpty(prefabPath))
 				{
 					GameObject powerupGO = PhotonNetwork.Instantiate(prefabPath, worldPos, Quaternion.identity, 0);
@@ -83,7 +83,7 @@ namespace BomberChap
 			}
 			else
 			{
-				if(effect == PowerupEffect.None)
+				if((PowerupEffect)effect == PowerupEffect.None)
 					CreateFlame(worldPos);
 			}
 		}

@@ -5,7 +5,7 @@ using System.Collections;
 
 namespace BomberChap
 {
-	public class OnlineMultiplayerGameController : Photon.PunBehaviour 
+	public class OnlineMultiplayerGameController : MultiplayerGameControllerBase
 	{
 		[SerializeField]
 		private ScreenFader m_screenFader;
@@ -24,14 +24,31 @@ namespace BomberChap
 		public UnityEngine.Events.UnityEvent onPlayerDisconnected;
 		public UnityEngine.Events.UnityEvent onDisconnectedFromServer;
 
+		private PhotonView m_photonView;
 		private int m_levelIndex;
 		private int m_currentRound;
 		private int m_playerOneWins;
 		private int m_playerTwoWins;
 		private bool m_registeredDeathThisRound;
 
+		public override int MaxRounds 
+		{
+			get { return m_maxRounds; }
+		}
+
+		public override int PlayerOneWins
+		{
+			get { return m_playerOneWins; }
+		}
+
+		public override int PlayerTwoWins
+		{
+			get { return m_playerTwoWins; }
+		}
+
 		private void Start()
 		{
+			m_photonView = PhotonView.Get(gameObject);
 			m_levelIndex = 0;
 			m_currentRound = 0;
 			m_playerOneWins = 0;
@@ -40,7 +57,7 @@ namespace BomberChap
 			if(PhotonNetwork.isMasterClient)
 			{
 				m_levelIndex = UnityEngine.Random.Range(0, LevelManager.LevelCount);
-				photonView.RPC("OnSetLevelIndexRPC", PhotonTargets.AllViaServer, m_levelIndex);
+				m_photonView.RPC("OnSetLevelIndexRPC", PhotonTargets.AllBuffered, m_levelIndex);
 			}
 
 			StartCoroutine(StartNextRound(0.0f));
@@ -117,17 +134,17 @@ namespace BomberChap
 		private void OnPlayerDead()
 		{
 			if(PhotonNetwork.isMasterClient)
-				photonView.RPC("OnPlayerOneDeadRPC", PhotonTargets.All);
+				m_photonView.RPC("OnPlayerOneDeadRPC", PhotonTargets.All);
 			else
-				photonView.RPC("OnPlayerTwoDeadRPC", PhotonTargets.All);
+				m_photonView.RPC("OnPlayerTwoDeadRPC", PhotonTargets.All);
 		}
 
-		public override void OnPhotonPlayerDisconnected(PhotonPlayer otherPlayer)
+		public void OnPhotonPlayerDisconnected(PhotonPlayer otherPlayer)
 		{
 			onPlayerDisconnected.Invoke();
 		}
 
-		public override void OnDisconnectedFromPhoton()
+		public void OnDisconnectedFromPhoton()
 		{
 			onDisconnectedFromServer.Invoke();
 		}

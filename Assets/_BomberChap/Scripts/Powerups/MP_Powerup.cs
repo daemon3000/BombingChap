@@ -3,27 +3,25 @@ using System.Collections;
 
 namespace BomberChap
 {
-	public class Powerup : MonoBehaviour 
+	public class MP_Powerup : Photon.MonoBehaviour 
 	{
 		[SerializeField]
 		private PowerupEffect m_effect;
 		[SerializeField]
 		private AudioClip m_effectSound;
-
+		
 		private void OnTriggerEnter2D(Collider2D other)
 		{
-			if(other.tag == Tags.Player || other.tag == Tags.PlayerOne || other.tag == Tags.PlayerTwo)
+			if(other.tag == Tags.PlayerOne || other.tag == Tags.PlayerTwo)
 			{
-				AudioManager.PlaySound(m_effectSound);
-				ApplyEffect(other.gameObject);
-				GameObject.Destroy(gameObject);
+				photonView.RPC("OnCollidedWithPlayerRPC", PhotonTargets.All, other.tag);
 			}
 			else if(other.tag == Tags.Flame || other.tag == Tags.Enemy)
 			{
-				GameObject.Destroy(gameObject);
+				photonView.RPC("OnCollidedWithFlameOrEnemyRPC", PhotonTargets.All);
 			}
 		}
-
+		
 		private void ApplyEffect(GameObject playerGO)
 		{
 			PlayerStats playerStats = playerGO.GetComponent<PlayerStats>();
@@ -33,7 +31,7 @@ namespace BomberChap
 				Debug.LogWarning("Failed to apply powerup effect. The player is missing some required components");
 				return;
 			}
-
+			
 			switch (m_effect) 
 			{
 			case PowerupEffect.BombCountUp:
@@ -61,8 +59,26 @@ namespace BomberChap
 			default:
 				break;
 			}
+		}
 
-			NotificationCenter.Dispatch(Notifications.ON_POWERUP_USED, new PowerupEvent(m_effect, playerGO.tag), false);
+		[PunRPC]
+		private void OnCollidedWithPlayerRPC(string playerTag)
+		{
+			GameObject playerGO = GameObject.FindGameObjectWithTag(playerTag);
+
+			ApplyEffect(playerGO);
+			AudioManager.PlaySound(m_effectSound);
+			NotificationCenter.Dispatch(Notifications.ON_POWERUP_USED, new PowerupEvent(m_effect, playerTag), false);
+
+			if(photonView.isMine)
+				PhotonNetwork.Destroy(gameObject);
+		}
+
+		[PunRPC]
+		private void OnCollidedWithFlameOrEnemyRPC()
+		{
+			if(photonView.isMine)
+				PhotonNetwork.Destroy(gameObject);
 		}
 	}
 }

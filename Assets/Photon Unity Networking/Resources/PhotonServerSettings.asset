@@ -46,4 +46,6 @@ MonoBehaviour:
   - OnStartNextRoundRPC
   - OnLoadWinSceneRPC
   - OnCreatePowerupRPC
+  - OnCollidedWithFlameOrEnemyRPC
+  - OnCollidedWithPlayerRPC
   DisableAutoOpenWizard: 1

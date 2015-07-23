@@ -4,7 +4,7 @@ using System.Collections;
 
 namespace BomberChap
 {
-	public class MultiplayerGameController : MonoBehaviour 
+	public class MultiplayerGameController : MultiplayerGameControllerBase
 	{
 		[SerializeField]
 		private ScreenFader m_screenFader;
@@ -25,17 +25,17 @@ namespace BomberChap
 		private int m_playerTwoWins;
 		private bool m_registeredDeathThisRound;
 
-		public int MaxRounds
+		public override int MaxRounds
 		{
 			get { return m_maxRounds; }
 		}
 
-		public int PlayerOneWins
+		public override int PlayerOneWins
 		{
 			get { return m_playerOneWins; }
 		}
 
-		public int PlayerTwoWins
+		public override int PlayerTwoWins
 		{
 			get { return m_playerTwoWins; }
 		}

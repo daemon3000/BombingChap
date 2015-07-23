@@ -16,14 +16,14 @@ GameObject:
   - 114: {fileID: 11432584}
   - 114: {fileID: 11495792}
   - 114: {fileID: 11453894}
-  - 114: {fileID: 11415336}
   - 114: {fileID: 11410412}
+  - 114: {fileID: 11415336}
   - 114: {fileID: 11469502}
   - 114: {fileID: 11438536}
-  - 114: {fileID: 11446590}
+  - 114: {fileID: 11491414}
   m_Layer: 0
   m_Name: mp_online_player_two
-  m_TagString: Player
+  m_TagString: PlayerTwo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -177,31 +177,6 @@ MonoBehaviour:
   m_messages:
   - OnGameLevelWillUnload
   - OnAllPlayersLoadedOnlineGameLevel
---- !u!114 &11446590
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 128076}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ownerId: 0
-  group: 0
-  prefixBackup: -1
-  observed: {fileID: 0}
-  synchronization: 3
-  onSerializeTransformOption: 0
-  onSerializeRigidBodyOption: 2
-  ownershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 449318}
-  ObservedComponentsFoldoutOpen: 1
-  viewIdField: 0
-  instantiationId: -1
-  isRuntimeInstantiated: 0
 --- !u!114 &11453894
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -257,6 +232,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de27898377f86354f9e47eb8499744d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11491414
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 128076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerId: 0
+  group: 0
+  prefixBackup: -1
+  observed: {fileID: 0}
+  synchronization: 3
+  onSerializeTransformOption: 0
+  onSerializeRigidBodyOption: 2
+  ownershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 449318}
+  ObservedComponentsFoldoutOpen: 1
+  viewIdField: 0
+  instantiationId: -1
+  isRuntimeInstantiated: 0
 --- !u!114 &11495792
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -311,12 +311,16 @@ Prefab:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 0}
+      propertyPath: ObservedComponents.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_TagString
-      value: Player
+      value: PlayerTwo
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Color.r
@@ -362,6 +366,10 @@ Prefab:
       propertyPath: m_collider
       value: 
       objectReference: {fileID: 6123902}
+    - target: {fileID: 0}
+      propertyPath: ObservedComponents.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 128076}

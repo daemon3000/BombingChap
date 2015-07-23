@@ -377,7 +377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8c72ad9ec3b95448b2fe281b91d3019, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameController: {fileID: 236587893}
+  m_gameController: {fileID: 236587893}
   m_playerOneWinsText: {fileID: 1942125408}
   m_playerTwoWinsText: {fileID: 978366687}
   m_playerOnePowerupText: {fileID: 571589908}

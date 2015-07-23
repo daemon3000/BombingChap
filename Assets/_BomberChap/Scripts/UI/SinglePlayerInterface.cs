@@ -81,7 +81,8 @@ namespace BomberChap
 		private void OnPowerupUsed(object arg)
 		{
 			PowerupEvent evt = (PowerupEvent)arg;
-			PlayerStats playerStats = evt.target.GetComponent<PlayerStats>();
+			GameObject playerGO = GameObject.FindGameObjectWithTag(evt.playerTag);
+			PlayerStats playerStats = playerGO.GetComponent<PlayerStats>();
 
 			switch (evt.effect) 
 			{

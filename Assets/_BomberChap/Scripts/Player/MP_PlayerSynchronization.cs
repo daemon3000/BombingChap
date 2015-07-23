@@ -4,7 +4,7 @@ using System.Collections;
 
 namespace BomberChap
 {
-	public class MP_PlayerNetworkController : Photon.MonoBehaviour
+	public class MP_PlayerSynchronization : Photon.MonoBehaviour
 	{
 		[SerializeField]
 		private PlayerController m_playerController;

@@ -7,7 +7,7 @@ namespace BomberChap
 	{
 		private IEnumerator OnTriggerEnter2D(Collider2D other)
 		{
-			if(this.tag == Tags.Player && (other.tag == Tags.Flame || other.tag == Tags.Enemy))
+			if((tag == Tags.PlayerOne || tag == Tags.PlayerTwo) && (other.tag == Tags.Flame || other.tag == Tags.Enemy))
 			{
 				yield return null;
 				NotificationCenter.Dispatch(Notifications.ON_PLAYER_DEAD);
