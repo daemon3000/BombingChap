@@ -109,6 +109,7 @@ namespace BomberChap
 					                                  prefabSet.mpCameraSystem,
 					                                  levelData.primaryPlayerPosition,
 					                                  levelData.secondaryPlayerPosition);
+					CreateEnemies(levelData.enemyPositions);
 				}
 			}
 			else

@@ -10,13 +10,13 @@ PlayerSettings:
   targetResolution: 0
   accelerometerFrequency: 60
   companyName: Cristian Geambasu
-  productName: Bomber Chap
+  productName: Bombing Chap
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_ShowUnitySplashScreen: 1
-  defaultScreenWidth: 900
+  defaultScreenWidth: 800
   defaultScreenHeight: 600
-  defaultScreenWidthWeb: 960
+  defaultScreenWidthWeb: 800
   defaultScreenHeightWeb: 600
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
@@ -134,7 +134,7 @@ PlayerSettings:
   m_BuildTargetIcons:
   - m_BuildTarget: 
     m_Icons:
-    - m_Icon: {fileID: 0}
+    - m_Icon: {fileID: 2800000, guid: 09e719e8d637b0443b5cb078cc718833, type: 3}
       m_Size: 128
   m_BuildTargetBatching:
   - m_BuildTarget: Standalone
